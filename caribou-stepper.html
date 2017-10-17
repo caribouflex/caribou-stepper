@@ -1,0 +1,38 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="caribou-stepper">
+  <template>
+    <style>
+       :host {
+        display: block;
+      }
+    </style>
+    <slot></slot>
+  </template>
+
+  <script>
+    /**
+     * `caribou-stepper`
+     * Stepper convey progress through numbered steps.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class CaribouStepper extends Polymer.Element {
+      static get is() {
+        return 'caribou-stepper';
+      }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'caribou-stepper'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(CaribouStepper.is, CaribouStepper);
+  </script>
+</dom-module>

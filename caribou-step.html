@@ -1,0 +1,102 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="custom-icons.html">
+
+<dom-module id="caribou-step">
+    <template>
+        <style>
+             :host {
+                display: block;
+            }
+
+            span.subtitle {
+                display: block;
+                font-size: 0.8em;
+                margin-top: 2px;
+                max-width: 150px;
+            }
+
+            div#labelBtn {
+                align-self: center;
+                padding: 0 16px;
+                font-size: 14sp;
+                color: #232323;
+            }
+
+            iron-icon#iconBtn {
+                border-radius: 25px;
+                background-color: #9e9e9e;
+                color: #fff;
+            }
+
+            div.layout {
+                border-left: 1px solid #bdbdbd;
+                margin-left: 25px;
+                padding: 10px 15px;
+            }
+        </style>
+
+        <paper-button on-tap="toggle">
+            <iron-icon id="iconBtn" icon="custom-icons:check"></iron-icon>
+            <div id="labelBtn">{{label}}
+                <span class="subtitle">{{label}}</span>
+            </div>
+        </paper-button>
+        <div class="layout">
+            <iron-collapse id="stepContent" opened="{{opened}}">
+                <slot></slot>
+            </iron-collapse>
+        </div>
+
+    </template>
+
+    <script>
+        /**
+         * `caribou-step`
+         * one step 
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class CaribouStep extends Polymer.Element {
+            static get is() {
+                return 'caribou-step';
+            }
+            static get properties() {
+                return {
+                    label: {
+                        type: String
+                    },
+
+                    isOpen: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    isSaved: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    isOptional: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    opened: {
+                        type: Boolean,
+                        reflectToAttribute: true
+                    },
+                };
+            }
+
+            toggle() {
+                this.$.stepContent.toggle();
+            }
+        }
+
+        window.customElements.define(CaribouStep.is, CaribouStep);
+    </script>
+</dom-module>

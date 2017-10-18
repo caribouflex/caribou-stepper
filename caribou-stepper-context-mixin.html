@@ -1,0 +1,20 @@
+<script>
+    window.Caribouflex = window.Caribouflex || {};
+    Caribouflex.Stepper = Caribouflex.Stepper || {};
+
+    /**
+     * @polymerMixin
+     */
+    Caribouflex.Stepper.ContextMixin = function (superClass) {
+        return class extends superClass {
+            static get properties() {
+                return {
+                    numberOfStep: {
+                        type: Number,
+                        value: 0
+                    }
+                }
+            }
+        }
+    }
+</script>

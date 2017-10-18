@@ -1,38 +1,50 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="caribou-stepper-progress-mixin.html">
 
 <dom-module id="caribou-stepper">
-  <template>
-    <style>
-       :host {
-        display: block;
-      }
-    </style>
-    <slot></slot>
-  </template>
+    <template>
+        <style>
+             :host {
+                display: block;
+            }
+        </style>
+        <slot></slot>
+    </template>
 
-  <script>
-    /**
-     * `caribou-stepper`
-     * Stepper convey progress through numbered steps.
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
-    class CaribouStepper extends Polymer.Element {
-      static get is() {
-        return 'caribou-stepper';
-      }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'caribou-stepper'
-          }
-        };
-      }
-    }
+    <script>
+        /**
+         * `caribou-stepper`
+         * Stepper convey progress through numbered steps.
+         *
+         *
+         * @memberof Caribouflex
+         * @mixes Caribouflex.Stepper.ProgressMixin
+         * @demo demo/index.html
+         */
+        class CaribouStepperElement extends Caribouflex.Stepper.ProgressMixin(Polymer.Element) {
+            static get is() {
+                return 'caribou-stepper';
+            }
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'caribou-stepper'
+                    }
+                };
+            }
 
-    window.customElements.define(CaribouStepper.is, CaribouStepper);
-  </script>
+            constructor() {
+                super();
+            }
+        }
+
+        window.customElements.define(CaribouStepperElement.is, CaribouStepperElement);
+
+        /**
+         * @namespace Caribouflex
+         */
+        window.Caribouflex = window.Caribouflex || {};
+        Caribouflex.CaribouStepperElement = CaribouStepperElement;
+    </script>
 </dom-module>

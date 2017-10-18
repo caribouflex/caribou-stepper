@@ -1,0 +1,23 @@
+<script>
+    window.Caribouflex = window.Caribouflex || {};
+    Caribouflex.Stepper = Caribouflex.Stepper || {};
+
+    /**
+     * @polymerMixin
+     */
+    Caribouflex.Stepper.ProgressMixin = function (superClass) {
+        return class extends superClass {
+            static get properties() {
+                return {
+                    steps: {
+                        type: Object
+                    },
+
+                    currentStep: {
+                        type: Number
+                    }
+                }
+            }
+        }
+    }
+</script>

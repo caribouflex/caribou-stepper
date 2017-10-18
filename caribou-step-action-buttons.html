@@ -1,0 +1,78 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<!--
+`caribou-step-action-buttons`
+
+
+Custom property | Description | Default 
+----------------|-------------|---------- 
+`--button-ink-color` | Background color of the ripple | `Based on the button's color` 
+`--button-style` | Mixin applied to the button | `{}` 
+-->
+<dom-module id="caribou-step-action-buttons">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-button {
+                margin: 0;
+                --paper-button-ink-color: var(--button-ink-color);
+                --paper-button: {
+                    color: #fff;
+                    background-color: lightblue;
+                    @apply --button-style;
+                };
+            }
+        </style>
+
+        <paper-button id="continueBtn">{{continueLabel}}</paper-button>
+        <paper-button id="cancelBtn">{{cancelLabel}}</paper-button>
+
+    </template>
+
+    <script>
+        /**
+         * `caribou-step-action-buttons`
+         * 
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class CaribouStepActionButtonsElement extends Polymer.Element {
+            static get is() {
+                return 'caribou-step-action-buttons';
+            }
+            static get properties() {
+                return {
+                    /**
+                     * The continue button text value
+                     */
+                    continueLabel: {
+                        type: String,
+                        value: "Continue"
+                    },
+
+                    /**
+                     * The cancel button text value
+                     */
+                    cancelLabel: {
+                        type: String,
+                        value: "Cancel"
+                    }
+                };
+            }
+        }
+
+        window.customElements.define(CaribouStepActionButtonsElement.is, CaribouStepActionButtonsElement);
+
+        /**
+         * @namespace Caribouflex
+         */
+        window.Caribouflex = window.Caribouflex || {};
+        Caribouflex.CaribouStepActionButtonsElement = CaribouStepActionButtonsElement;
+    </script>
+</dom-module>

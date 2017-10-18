@@ -2,6 +2,8 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-collapse/iron-collapse.html">
 <link rel="import" href="custom-icons.html">
+<link rel="import" href="caribou-step-action-buttons.html">
+<link rel="import" href="caribou-stepper-context-mixin.html">
 
 <dom-module id="caribou-step">
     <template>
@@ -15,6 +17,11 @@
                 font-size: 0.8em;
                 margin-top: 2px;
                 max-width: 150px;
+            }
+
+            paper-button {
+                display: flex;
+                justify-content: flex-start;
             }
 
             div#labelBtn {
@@ -32,8 +39,8 @@
 
             div.layout {
                 border-left: 1px solid #bdbdbd;
-                margin-left: 25px;
-                padding: 10px 15px;
+                margin-left: 24px;
+                padding: 10px 28px;
             }
         </style>
 
@@ -46,6 +53,7 @@
         <div class="layout">
             <iron-collapse id="stepContent" opened="{{opened}}">
                 <slot></slot>
+                <caribou-step-action-buttons></caribou-step-action-buttons>
             </iron-collapse>
         </div>
 
@@ -56,11 +64,11 @@
          * `caribou-step`
          * one step 
          *
-         * @customElement
-         * @polymer
+         * @memberof Caribouflex
+         * @mixes Caribouflex.Stepper.ContextMixin
          * @demo demo/index.html
          */
-        class CaribouStep extends Polymer.Element {
+        class CaribouStepElement extends Caribouflex.Stepper.ContextMixin(Polymer.Element) {
             static get is() {
                 return 'caribou-step';
             }
@@ -92,11 +100,30 @@
                 };
             }
 
+            constructor() {
+                super();
+                this.numberOfStep = this.numberOfStep + 1;
+                Caribouflex.Stepper.ContextMixin.numberOfStep = Caribouflex.Stepper.ContextMixin.numberOfStep ===
+                    undefined ? 1 : Caribouflex.Stepper.ContextMixin.numberOfStep + 1;
+            }
+
             toggle() {
                 this.$.stepContent.toggle();
             }
+
+            ready() {
+                super.ready();
+                console.log(Caribouflex);
+                console.log(this.numberOfStep);
+            }
         }
 
-        window.customElements.define(CaribouStep.is, CaribouStep);
+        window.customElements.define(CaribouStepElement.is, CaribouStepElement);
+
+        /**
+         * @namespace Caribouflex
+         */
+        window.Caribouflex = window.Caribouflex || {};
+        Caribouflex.CaribouStepElement = CaribouStepElement;
     </script>
 </dom-module>

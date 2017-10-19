@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="caribou-stepper-progress-mixin.html">
+<link rel="import" href="caribou-stepper-stepper-property-mixin.html">
 
 <dom-module id="caribou-stepper">
     <template>
@@ -16,26 +17,43 @@
          * `caribou-stepper`
          * Stepper convey progress through numbered steps.
          *
-         *
          * @memberof Caribouflex
          * @mixes Caribouflex.Stepper.ProgressMixin
+         * @mixes Caribouflex.Stepper.StepperPropertyMixin
          * @demo demo/index.html
          */
-        class CaribouStepperElement extends Caribouflex.Stepper.ProgressMixin(Polymer.Element) {
+        class CaribouStepperElement extends Caribouflex.Stepper.ProgressMixin(Caribouflex.Stepper.StepperPropertyMixin(
+            Polymer.Element)) {
             static get is() {
                 return 'caribou-stepper';
             }
             static get properties() {
                 return {
-                    prop1: {
-                        type: String,
-                        value: 'caribou-stepper'
+                    /**
+                     * Contain all the steps registered.
+                     */
+                    _steps: {
+                        type: Array,
+                        value: []
                     }
                 };
             }
 
             constructor() {
                 super();
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+            }
+
+            _registerStep(element) {
+                this.push('_steps', element);
+                element.addEventListener("opened-changed", this._changeState.bind(this));
+            }
+
+            _changeState(event) {
+                console.log(event);
             }
         }
 

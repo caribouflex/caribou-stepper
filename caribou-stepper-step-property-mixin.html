@@ -1,0 +1,50 @@
+<script>
+    window.Caribouflex = window.Caribouflex || {};
+    Caribouflex.Stepper = Caribouflex.Stepper || {};
+
+    /**
+     * @polymerMixin
+     */
+    Caribouflex.Stepper.StepPropertyMixin = function (superClass) {
+        return class extends superClass {
+            static get properties() {
+                return {
+                    save: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    editable: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    optional: {
+                        type: Boolean,
+                        value: false
+                    }
+                }
+            }
+
+            _isPreviousSaved() {
+                //check if previous element is saved
+            }
+
+            _isNextStepSaved() {
+
+            }
+
+            /**
+             * This function is used to register an element to the parent.
+             * @private
+             */
+            _register() {
+                this.parentElement._registerStep(this);
+            }
+
+            _getOpenFirstStepOnStartup() {
+                return this.parentElement.openFirstStepOnStartup;
+            }
+        }
+    }
+</script>

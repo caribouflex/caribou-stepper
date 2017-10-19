@@ -1,22 +1,17 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="custom-icons.html">
 <link rel="import" href="caribou-step-action-buttons.html">
-<link rel="import" href="caribou-stepper-context-mixin.html">
+<link rel="import" href="caribou-stepper-step-property-mixin.html">
+
 
 <dom-module id="caribou-step">
     <template>
         <style>
              :host {
                 display: block;
-            }
-
-            span.subtitle {
-                display: block;
-                font-size: 0.8em;
-                margin-top: 2px;
-                max-width: 150px;
             }
 
             paper-button {
@@ -31,7 +26,28 @@
                 color: #232323;
             }
 
-            iron-icon#iconBtn {
+             :host([optional]) span#subtitle {
+                display: block;
+                font-size: 0.8em;
+                margin-top: 2px;
+                max-width: 150px;
+                text-transform: capitalize;
+            }
+
+             :host span#subtitle {
+                display: none;
+            }
+
+            span.badgeNumber {
+                @apply --layout-horizontal;
+                @apply --layout-center-justified;
+                @apply --layout-center;
+                width: 24px;
+                height: 24px;
+            }
+
+            iron-icon#iconBtn,
+            span.badgeNumber {
                 border-radius: 25px;
                 background-color: #9e9e9e;
                 color: #fff;
@@ -45,66 +61,65 @@
         </style>
 
         <paper-button on-tap="toggle">
-            <iron-icon id="iconBtn" icon="custom-icons:check"></iron-icon>
+            <iron-icon id="iconBtn" icon="custom-icons:check" hidden></iron-icon>
+            <span class="badgeNumber">{{_badgeNumber}}</span>
             <div id="labelBtn">{{label}}
-                <span class="subtitle">{{label}}</span>
+                <span id="subtitle">Optional</span>
             </div>
         </paper-button>
         <div class="layout">
-            <iron-collapse id="stepContent" opened="{{opened}}">
+            <iron-collapse id="stepContent" opened="[[_isOpen]]">
                 <slot></slot>
                 <caribou-step-action-buttons></caribou-step-action-buttons>
             </iron-collapse>
         </div>
-
     </template>
 
     <script>
+        window.Caribouflex = window.Caribouflex || {};
+        Caribouflex.Stepper = Caribouflex.Stepper || {};
+        Caribouflex.Stepper.Context = Caribouflex.Stepper.Context || {};
+
         /**
          * `caribou-step`
-         * one step 
+         * one step
          *
          * @memberof Caribouflex
-         * @mixes Caribouflex.Stepper.ContextMixin
+         * @mixes Caribouflex.Stepper.StepPropertyMixin
          * @demo demo/index.html
          */
-        class CaribouStepElement extends Caribouflex.Stepper.ContextMixin(Polymer.Element) {
+        class CaribouStepElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
             static get is() {
                 return 'caribou-step';
             }
+
             static get properties() {
                 return {
                     label: {
                         type: String
                     },
 
-                    isOpen: {
-                        type: Boolean,
-                        value: false
+                    _badgeNumber: {
+                        type: Number,
+                        readOnly: true
                     },
 
-                    isSaved: {
+                    _isOpen: {
                         type: Boolean,
-                        value: false
-                    },
-
-                    isOptional: {
-                        type: Boolean,
-                        value: false
-                    },
-
-                    opened: {
-                        type: Boolean,
-                        reflectToAttribute: true
-                    },
+                        value: false,
+                        readOnly: true
+                    }
                 };
             }
 
             constructor() {
                 super();
                 this.numberOfStep = this.numberOfStep + 1;
-                Caribouflex.Stepper.ContextMixin.numberOfStep = Caribouflex.Stepper.ContextMixin.numberOfStep ===
-                    undefined ? 1 : Caribouflex.Stepper.ContextMixin.numberOfStep + 1;
+
+                //init the badge value
+                Caribouflex.Stepper.Context.numberOfStep = Caribouflex.Stepper.Context.numberOfStep ===
+                    undefined ? 1 : Caribouflex.Stepper.Context.numberOfStep + 1;
+                this._set_badgeNumber(Caribouflex.Stepper.Context.numberOfStep);
             }
 
             toggle() {
@@ -113,8 +128,22 @@
 
             ready() {
                 super.ready();
-                console.log(Caribouflex);
-                console.log(this.numberOfStep);
+
+                this.$.stepContent.addEventListener("opened-changed", this._changeState.bind(this));
+
+                //we open the first step according the value set on the stepper element.
+                if (Caribouflex.Stepper.Context.numberOfStep === 1)
+                    this._set_isOpen(this._getOpenFirstStepOnStartup());
+
+                //register the element
+                this._register();
+
+            }
+
+            _changeState(event) {
+                // Fire event to inform the stepper that another step is clicked to close the step open if there is and 
+                // if its in not linear.
+                console.log(event);
             }
         }
 

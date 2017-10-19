@@ -1,0 +1,35 @@
+<script>
+    window.Caribouflex = window.Caribouflex || {};
+    Caribouflex.Stepper = Caribouflex.Stepper || {};
+
+    /**
+     * @polymerMixin
+     */
+    Caribouflex.Stepper.StepperPropertyMixin = function (superClass) {
+        return class extends superClass {
+            static get properties() {
+                return {
+                    linear: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    horizontal: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    mobile: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    openFirstStepOnStartup: {
+                        type: Boolean,
+                        value: false
+                    }
+                }
+            }
+        }
+    }
+</script>

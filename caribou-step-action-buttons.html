@@ -13,7 +13,7 @@ Custom property | Description | Default
 <dom-module id="caribou-step-action-buttons">
     <template>
         <style>
-            :host {
+             :host {
                 display: block;
             }
 
@@ -24,12 +24,14 @@ Custom property | Description | Default
                     color: #fff;
                     background-color: lightblue;
                     @apply --button-style;
-                };
+                }
+                ;
             }
         </style>
 
-        <paper-button id="continueBtn">{{continueLabel}}</paper-button>
-        <paper-button id="cancelBtn">{{cancelLabel}}</paper-button>
+        <paper-button id="continueBtn" data-event="continue" on-tap="_fireEvent">{{continueLabel}}</paper-button>
+        <paper-button id="cancelBtn" data-event="cancel" on-tap="_fireEvent">{{cancelLabel}}</paper-button>
+        <paper-button id="skipBtn" data-event="skip" on-tap="_fireEvent">{{skipLabel}}</paper-button>
 
     </template>
 
@@ -51,19 +53,29 @@ Custom property | Description | Default
                     /**
                      * The continue button text value
                      */
-                    continueLabel: {
-                        type: String,
-                        value: "Continue"
-                    },
+                    continueLabel: String,
 
                     /**
                      * The cancel button text value
                      */
-                    cancelLabel: {
-                        type: String,
-                        value: "Cancel"
-                    }
+                    cancelLabel: String,
+
+                    /**
+                     * The skip button text value
+                     */
+                    skipLabel: String
                 };
+            }
+
+            /**
+             * This is a callback function called when one of the different button is clicked.
+             */
+            _fireEvent(e) {
+                var eventName = e.currentTarget.dataset.event;
+                this.dispatchEvent(new CustomEvent(eventName + '-clicked', {
+                    bubbles: true,
+                    composed: true
+                }));
             }
         }
 

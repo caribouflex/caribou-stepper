@@ -38,6 +38,18 @@
                 display: none;
             }
 
+             :host iron-icon#iconBtn {
+                display: none;
+            }
+
+             :host([save]) span.badgeNumber {
+                display: none;
+            }
+
+             :host([save]) iron-icon#iconBtn {
+                display: block;
+            }
+
             span.badgeNumber {
                 @apply --layout-horizontal;
                 @apply --layout-center-justified;
@@ -61,16 +73,16 @@
         </style>
 
         <paper-button on-tap="toggle">
-            <iron-icon id="iconBtn" icon="custom-icons:check" hidden></iron-icon>
+            <iron-icon id="iconBtn" icon="custom-icons:[[_getIcon(optional)]]"></iron-icon>
             <span class="badgeNumber">{{_badgeNumber}}</span>
             <div id="labelBtn">{{label}}
                 <span id="subtitle">Optional</span>
             </div>
         </paper-button>
         <div class="layout">
-            <iron-collapse id="stepContent" opened="[[_isOpen]]">
+            <iron-collapse id="stepContent" opened="[[_active]]">
                 <slot></slot>
-                <caribou-step-action-buttons></caribou-step-action-buttons>
+                <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" cancel-label="[[cancelLabel]]" skip-label="[[skipLabel]]"></caribou-step-action-buttons>
             </iron-collapse>
         </div>
     </template>
@@ -102,12 +114,6 @@
                     _badgeNumber: {
                         type: Number,
                         readOnly: true
-                    },
-
-                    _isOpen: {
-                        type: Boolean,
-                        value: false,
-                        readOnly: true
                     }
                 };
             }
@@ -123,7 +129,9 @@
             }
 
             toggle() {
-                this.$.stepContent.toggle();
+                if ((!this.parentElement.linear && (!this.save || this.optional)) || (this.parentElement.linear &&
+                        this.optional))
+                    this.$.stepContent.toggle();
             }
 
             ready() {
@@ -133,17 +141,23 @@
 
                 //we open the first step according the value set on the stepper element.
                 if (Caribouflex.Stepper.Context.numberOfStep === 1)
-                    this._set_isOpen(this._getOpenFirstStepOnStartup());
+                    this.setActive(this._getOpenFirstStepOnStartup());
 
                 //register the element
                 this._register();
-
             }
 
             _changeState(event) {
                 // Fire event to inform the stepper that another step is clicked to close the step open if there is and 
                 // if its in not linear.
                 console.log(event);
+            }
+
+            _getIcon(optional) {
+                if (optional)
+                    return "create";
+                else
+                    return "check";
             }
         }
 

@@ -24,9 +24,11 @@
          */
         class CaribouStepperElement extends Caribouflex.Stepper.ProgressMixin(Caribouflex.Stepper.StepperPropertyMixin(
             Polymer.Element)) {
+
             static get is() {
                 return 'caribou-stepper';
             }
+
             static get properties() {
                 return {
                     /**
@@ -43,12 +45,45 @@
                 super();
             }
 
+            ready() {
+                super.ready();
+            }
+
+            nextStep(e) {
+                console.log(e);
+                console.log("next");
+
+                var step = e.target;
+                step.setAttribute("save", true);
+                step.setActive(false);
+                if (step.nextElementSibling !== undefined && step.nextElementSibling !== null)
+                    step.nextElementSibling._set_active(true);
+
+            }
+
+            skipStep(e) {
+                if (!this.linear) {
+                    var step = e.target;
+                    step.setActive(false);
+                    if (step.nextElementSibling !== undefined && step.nextElementSibling !== null)
+                        step.nextElementSibling._set_active(true);
+                } else
+                    console.log("can't skip you are in linear mode.");
+            }
+
+            _cancelState(e) {
+                console.log("cancel");
+            }
+
             connectedCallback() {
                 super.connectedCallback();
             }
 
             _registerStep(element) {
                 this.push('_steps', element);
+                element.addEventListener("continue-clicked", this.nextStep.bind(this));
+                element.addEventListener("skip-clicked", this.skipStep.bind(this));
+                element.addEventListener("cancel-clicked", this._cancelState.bind(this));
                 element.addEventListener("opened-changed", this._changeState.bind(this));
             }
 

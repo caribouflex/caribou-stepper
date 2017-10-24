@@ -22,6 +22,36 @@
                     optional: {
                         type: Boolean,
                         value: false
+                    },
+
+                    _active: {
+                        type: Boolean,
+                        value: false,
+                        readOnly: true
+                    },
+
+                    /**
+                     * The continue button text value
+                     */
+                    continueLabel: {
+                        type: String,
+                        value: "Continue"
+                    },
+
+                    /**
+                     * The cancel button text value
+                     */
+                    cancelLabel: {
+                        type: String,
+                        value: "Cancel"
+                    },
+
+                    /**
+                     * The skip button text value
+                     */
+                    skipLabel: {
+                        type: String,
+                        value: "Skip"
                     }
                 }
             }
@@ -32,6 +62,14 @@
 
             _isNextStepSaved() {
 
+            }
+
+            setActive(value) {
+                this._set_active(value);
+            }
+
+            setSave(value) {
+                this._set_active(value);
             }
 
             /**

@@ -29,9 +29,11 @@ Custom property | Description | Default
             }
         </style>
 
-        <paper-button id="continueBtn" data-event="continue" on-tap="_fireEvent">{{continueLabel}}</paper-button>
-        <paper-button id="cancelBtn" data-event="cancel" on-tap="_fireEvent">{{cancelLabel}}</paper-button>
-        <paper-button id="skipBtn" data-event="skip" on-tap="_fireEvent">{{skipLabel}}</paper-button>
+        <paper-button id="updateBtn" data-event="update" hidden="[[!isUpdate]]" on-tap="_fireEvent">{{updateLabel}}</paper-button>
+        <paper-button id="continueBtn" data-event="continue" hidden="[[__isContinueHidden]]" on-tap="_fireEvent">{{continueLabel}}</paper-button>
+        <paper-button id="skipBtn" data-event="skip" hidden="[[!skipButton]]" on-tap="_fireEvent">{{skipLabel}}</paper-button>
+        <paper-button id="finishBtn" data-event="finish" hidden="[[!isFinish]]" on-tap="_fireEvent">{{finishLabel}}</paper-button>
+
 
     </template>
 
@@ -50,21 +52,53 @@ Custom property | Description | Default
             }
             static get properties() {
                 return {
+
+                    skipButton: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    isUpdate: {
+                        type: Boolean,
+                        value: false,
+                        observer: 'setContinueHidden'
+                    },
+
+                    __isContinueHidden: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    isFinish: {
+                        type: Boolean,
+                        value: false,
+                        observer: 'setContinueHidden'
+                    },
+
                     /**
                      * The continue button text value
                      */
                     continueLabel: String,
 
                     /**
-                     * The cancel button text value
+                     * The skip button text value
                      */
-                    cancelLabel: String,
+                    skipLabel: String,
 
                     /**
                      * The skip button text value
                      */
-                    skipLabel: String
+                    finishLabel: String,
+
+                    /**
+                     * The skip button text value
+                     */
+                    updateLabel: String
                 };
+            }
+
+            setFinish(value) {
+                this.isFinish = value;
             }
 
             /**
@@ -76,6 +110,14 @@ Custom property | Description | Default
                     bubbles: true,
                     composed: true
                 }));
+            }
+
+            setContinueHidden(value) {
+                console.log("set continue hidden");
+                if (value)
+                    this.__isContinueHidden = true;
+                else
+                    this.__isContinueHidden = false;
             }
         }
 

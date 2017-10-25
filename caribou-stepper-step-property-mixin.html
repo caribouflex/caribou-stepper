@@ -24,10 +24,9 @@
                         value: false
                     },
 
-                    _active: {
+                    __active: {
                         type: Boolean,
-                        value: false,
-                        readOnly: true
+                        value: false
                     },
 
                     /**
@@ -39,11 +38,19 @@
                     },
 
                     /**
-                     * The cancel button text value
+                     * The finish button text value
                      */
-                    cancelLabel: {
+                    finishLabel: {
                         type: String,
-                        value: "Cancel"
+                        value: "Finish"
+                    },
+
+                    /**
+                     * The update button text value
+                     */
+                    updateLabel: {
+                        type: String,
+                        value: "Update"
                     },
 
                     /**
@@ -52,6 +59,14 @@
                     skipLabel: {
                         type: String,
                         value: "Skip"
+                    },
+
+                    /**
+                     * The skip button text value
+                     */
+                    skipButton: {
+                        type: Boolean,
+                        value: false
                     }
                 }
             }
@@ -64,12 +79,24 @@
 
             }
 
-            setActive(value) {
-                this._set_active(value);
+            saveStep() {
+                this.setAttribute("save", true);
             }
 
-            setSave(value) {
-                this._set_active(value);
+            openNextStep() {
+                if (this.nextElementSibling !== undefined && this.nextElementSibling !== null && !this.nextElementSibling
+                    .save) {
+                    // We toggle the step. As parameter we set if it's the last step or not
+                    // for the button.
+                    this.nextElementSibling.toggleStep(this.parentElement.isLastStep());
+
+                } else if (this.nextElementSibling !== undefined && this.nextElementSibling !== null)
+                    this.nextElementSibling.openNextStep();
+                else
+                    this.dispatchEvent(new CustomEvent('last-step-closed', {
+                        bubbles: true,
+                        composed: true
+                    }));
             }
 
             /**

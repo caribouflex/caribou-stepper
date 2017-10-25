@@ -50,23 +50,17 @@
             }
 
             nextStep(e) {
-                console.log(e);
-                console.log("next");
-
                 var step = e.target;
-                step.setAttribute("save", true);
-                step.setActive(false);
-                if (step.nextElementSibling !== undefined && step.nextElementSibling !== null)
-                    step.nextElementSibling._set_active(true);
-
+                step.saveStep();
+                step.toggleStep();
+                step.openNextStep();
             }
 
             skipStep(e) {
                 if (!this.linear) {
                     var step = e.target;
-                    step.setActive(false);
-                    if (step.nextElementSibling !== undefined && step.nextElementSibling !== null)
-                        step.nextElementSibling._set_active(true);
+                    step.toggleStep();
+                    step.openNextStep();
                 } else
                     console.log("can't skip you are in linear mode.");
             }
@@ -79,16 +73,63 @@
                 super.connectedCallback();
             }
 
-            _registerStep(element) {
-                this.push('_steps', element);
-                element.addEventListener("continue-clicked", this.nextStep.bind(this));
-                element.addEventListener("skip-clicked", this.skipStep.bind(this));
-                element.addEventListener("cancel-clicked", this._cancelState.bind(this));
-                element.addEventListener("opened-changed", this._changeState.bind(this));
+            _activeChanged(step) {
+
             }
 
-            _changeState(event) {
-                console.log(event);
+            isLastStep() {
+                var stepsLength = this._steps.length;
+                var saveCpt = 0;
+                for (var i = 0; i < this._steps.length; i++) {
+                    var step = this.getStepById(i);
+                    if (step.save) {
+                        saveCpt++;
+                    }
+                }
+
+                if (stepsLength - 1 === saveCpt)
+                    return true;
+                else
+                    return false;
+            }
+
+            _validStepper() {
+                var done = true; //true if all step are valid.
+                for (var i = 0; i < this._steps.length; i++) {
+                    var step = this.getStepById(i);
+                    if (!step.save) {
+                        done = false;
+                        step.toggleStep(this.isLastStep());
+                        break;
+                    }
+                }
+
+                if (done) {
+                    console.log("caribou-stepper finished.");
+                    this.dispatchEvent(new CustomEvent('stepper-finished', {
+                        bubbles: true,
+                        composed: true
+                    }));
+                }
+            }
+
+            /**
+             * This function is used to return the step element 
+             * situated at the specific ID.
+             * @param {Number} id The id of the step to retrieve
+             * @return {Object} The stepper object.
+             */
+            getStepById(id) {
+                return this.get(['_steps', id])
+            }
+
+            _registerStep(element) {
+                this.push('_steps', element);
+                element.addEventListener("last-step-closed", this._validStepper.bind(this));
+                element.addEventListener("continue-clicked", this.nextStep.bind(this));
+                element.addEventListener("finish-clicked", this.nextStep.bind(this));
+                element.addEventListener("skip-clicked", this.skipStep.bind(this));
+                element.addEventListener("update-clicked", this.nextStep.bind(this));
             }
         }
 

@@ -72,17 +72,18 @@
             }
         </style>
 
-        <paper-button on-tap="toggle">
-            <iron-icon id="iconBtn" icon="custom-icons:[[_getIcon(optional)]]"></iron-icon>
+        <paper-button on-tap="_toggle">
+            <iron-icon id="iconBtn" icon="custom-icons:[[_getIcon(editable)]]"></iron-icon>
             <span class="badgeNumber">{{_badgeNumber}}</span>
             <div id="labelBtn">{{label}}
                 <span id="subtitle">Optional</span>
             </div>
         </paper-button>
         <div class="layout">
-            <iron-collapse id="stepContent" opened="[[_active]]">
+            <iron-collapse id="stepContent" opened="[[__active]]">
                 <slot></slot>
-                <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" cancel-label="[[cancelLabel]]" skip-label="[[skipLabel]]"></caribou-step-action-buttons>
+                <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" finish-label="[[finishLabel]]" update-label="[[updateLabel]]"
+                    skip-label="[[skipLabel]]" skip-button="[[skipButton]]"></caribou-step-action-buttons>
             </iron-collapse>
         </div>
     </template>
@@ -128,10 +129,20 @@
                 this._set_badgeNumber(Caribouflex.Stepper.Context.numberOfStep);
             }
 
-            toggle() {
-                if ((!this.parentElement.linear && (!this.save || this.optional)) || (this.parentElement.linear &&
-                        this.optional))
-                    this.$.stepContent.toggle();
+            _toggle() {
+                if ((!this.parentElement.linear && (!this.save || this.editable)) || (this.parentElement.linear &&
+                        this.optional)) {
+                    this.toggleStep();
+                    if (this.save && this.editable)
+                        this.$.stepButtons.isUpdate = true;
+                }
+            }
+
+            toggleStep(isLast) {
+                if (isLast !== undefined && isLast)
+                    this.$.stepButtons.setFinish(true);
+
+                this.$.stepContent.toggle();
             }
 
             ready() {
@@ -141,7 +152,7 @@
 
                 //we open the first step according the value set on the stepper element.
                 if (Caribouflex.Stepper.Context.numberOfStep === 1)
-                    this.setActive(this._getOpenFirstStepOnStartup());
+                    this.setAttribute("__active", this._getOpenFirstStepOnStartup());
 
                 //register the element
                 this._register();
@@ -150,11 +161,14 @@
             _changeState(event) {
                 // Fire event to inform the stepper that another step is clicked to close the step open if there is and 
                 // if its in not linear.
-                console.log(event);
+                this.dispatchEvent(new CustomEvent('active-changed', {
+                    bubbles: true,
+                    composed: true
+                }));
             }
 
-            _getIcon(optional) {
-                if (optional)
+            _getIcon(editable) {
+                if (editable)
                     return "create";
                 else
                     return "check";

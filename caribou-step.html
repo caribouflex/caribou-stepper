@@ -6,24 +6,61 @@
 <link rel="import" href="caribou-step-action-buttons.html">
 <link rel="import" href="caribou-stepper-step-property-mixin.html">
 
+<!--
+`<caribou-step>` is an element that need to be surrounded by a `<caribou-stepper>` element.
 
+    This element correspond correspond to one step of the all stepper.
+    It can be Editable and Optional. 
+    These both values corresponds to property that can be set on this element.
+    Also you can choose the name of each buttons step.
+    If the stepper is set as Linear, the Skip button will do nothing except if the property Optional is set.
+
+    You can add whatever you want inside the `<caribou-step>` element tag.
+    
+    Each steps will be numbered following the order added into the stepper.
+
+    Example:
+        '<caribou-step label="Information" skip-button optional>
+            <paper-input always-float-label label="Surname"></paper-input>
+            <paper-input label="username">
+                <iron-icon icon="mail" slot="prefix"></iron-icon>
+                <div slot="suffix">@email.com</div>
+            </paper-input>
+          </caribou-step>'
+
+    ### Styling The following custom properties and mixins are available for styling: 
+
+    **For the '--step-badge-width' and the '--step-badge-height', there is a border (6px) added to the badge that could not be changed.
+    
+    Custom property | Description | Default
+    ----------------|-------------|----------
+     `--step-connector-line-color` | Color of the line that connect the steps | `#BDBDBD` 
+     `--step-saved-label-color` | Color of the label once it's saved | `#424242`
+     `--step-active-label-color`| Color of the label when the step is active | `#424242`
+     `--step-label-color`| Initial color of the label | `#E0E0E0`
+     `--step-badge-height`| The height of the badge (without border) | `18px`
+     `--step-badge-width`| The width of the badge (without border) | `18px`
+     `--step-save-badge-color`| Color of the badge once the step is saved | `--primary-color`
+     `--step-badge-color`| Initial color of the badge | `#9E9E9E`
+     `--step-badge-content-color`| Color of the number and the icon inside the badge | `#FFFFFF`
+-->
 <dom-module id="caribou-step">
     <template>
         <style>
              :host {
                 display: block;
             }
+            /* General */
+
+            div.layout {
+                border-left: 1px solid var(--step-connector-line-color, #BDBDBD);
+                margin-left: 24px;
+                padding: 10px 28px;
+            }
 
             paper-button {
                 display: flex;
                 justify-content: flex-start;
-            }
-
-            div#labelBtn {
-                align-self: center;
-                padding: 0 16px;
-                font-size: 14sp;
-                color: #232323;
             }
 
              :host([optional]) span#subtitle {
@@ -37,38 +74,61 @@
              :host span#subtitle {
                 display: none;
             }
+            /* label button */
+
+             :host([save]) div#labelBtn {
+                color: var(--step-saved-label-color, #424242);
+                font-weight: inherit;
+            }
+
+             :host([save][active]) div#labelBtn,
+             :host([active]) div#labelBtn {
+                color: var(--step-active-label-color, #424242);
+                font-weight: 600;
+            }
+
+            div#labelBtn {
+                align-self: center;
+                padding: 0 16px;
+                font-size: 14sp;
+                color: var(--step-label-color, #E0E0E0);
+            }
+            /* icon button */
 
              :host iron-icon#iconBtn {
                 display: none;
-            }
-
-             :host([save]) span.badgeNumber {
-                display: none;
+                --iron-icon-fill-color: var(--step-badge-content-color, #FFFFFF);
+                --iron-icon-stroke-color: var(--step-badge-content-color, #FFFFFF);
             }
 
              :host([save]) iron-icon#iconBtn {
                 display: block;
+                border-color: var(--step-save-badge-color, var(--primary-color));
+                background-color: var(--step-save-badge-color, var(--primary-color));
+            }
+            /* Badge */
+
+             :host([save]) span.badgeNumber {
+                display: none;
             }
 
             span.badgeNumber {
                 @apply --layout-horizontal;
                 @apply --layout-center-justified;
                 @apply --layout-center;
-                width: 24px;
-                height: 24px;
+                width: var(--step-badge-width, 18px);
+                height: var(--step-badge-height, 18px);
             }
+            /* Badge and iron-icon */
 
             iron-icon#iconBtn,
             span.badgeNumber {
+                --iron-icon-height: 18px;
+                --iron-icon-width: 18px;
                 border-radius: 25px;
-                background-color: #9e9e9e;
-                color: #fff;
-            }
-
-            div.layout {
-                border-left: 1px solid #bdbdbd;
-                margin-left: 24px;
-                padding: 10px 28px;
+                border: 6px solid var(--step-badge-color, #9E9E9E);
+                background-color: var(--step-badge-color, #9E9E9E);
+                color: var(--step-badge-content-color, #FFFFFF);
             }
         </style>
 
@@ -80,7 +140,7 @@
             </div>
         </paper-button>
         <div class="layout">
-            <iron-collapse id="stepContent" opened="[[__active]]">
+            <iron-collapse id="stepContent" opened="{{active}}">
                 <slot></slot>
                 <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" finish-label="[[finishLabel]]" update-label="[[updateLabel]]"
                     skip-label="[[skipLabel]]" skip-button="[[skipButton]]"></caribou-step-action-buttons>
@@ -102,16 +162,34 @@
          * @demo demo/index.html
          */
         class CaribouStepElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
+
+            /**
+             * Fired when the last step has been finished.
+             * This event is declared in the 'StepPropertyMixin'.
+             * Bubble event.
+             *
+             * @event last-step-closed
+             * @param {Object} detail empty
+             */
+
             static get is() {
                 return 'caribou-step';
             }
 
             static get properties() {
                 return {
+
+                    /**
+                     * This is the label of the step
+                     */
                     label: {
                         type: String
                     },
 
+                    /**
+                     * This is the number of the step.
+                     * This property is used on the badge.
+                     */
                     _badgeNumber: {
                         type: Number,
                         readOnly: true
@@ -119,9 +197,12 @@
                 };
             }
 
+            /**
+             * Into this constructor we will initialize the badge value.
+             * The badge value is determine according a property set and increment into the Caribouflex.Stepper.Context
+             */
             constructor() {
                 super();
-                this.numberOfStep = this.numberOfStep + 1;
 
                 //init the badge value
                 Caribouflex.Stepper.Context.numberOfStep = Caribouflex.Stepper.Context.numberOfStep ===
@@ -129,15 +210,46 @@
                 this._set_badgeNumber(Caribouflex.Stepper.Context.numberOfStep);
             }
 
+            /**
+             * In this ready function, we will take care of oppening the step if it's the first one 
+             * And if the parameter is set for.
+             * Then we will call the register function, which is used to register a step into the stepper.
+             */
+            ready() {
+                super.ready();
+
+                //this.$.stepContent.addEventListener("opened-changed", this._changeState.bind(this));
+
+                //we open the first step according the value set on the stepper element.
+                if (Caribouflex.Stepper.Context.numberOfStep === 1)
+                    this.active = this._getOpenFirstStepOnStartup();
+
+                //register the element
+                this._register();
+            }
+
+            /**
+             * This is a callback function called whent the step title is clicked.
+             * This will close all the open steps before opening the one selected, if the criteria are respected.
+             * Moreover, if we are in a case of a modification, we will display the update button.
+             * @private
+             */
             _toggle() {
                 if ((!this.parentElement.linear && (!this.save || this.editable)) || (this.parentElement.linear &&
-                        this.optional)) {
+                        this.editable)) {
+                    this.parentElement.closeAllStep();
                     this.toggleStep();
                     if (this.save && this.editable)
                         this.$.stepButtons.isUpdate = true;
                 }
             }
 
+            /**
+             * This function is used to toggle the step. That means, it will open the current step.
+             * When a step is open the 'active' property is true.
+             * @param {Boolean} isLast This property is used to indicate if this step is the last step of the stepper.
+             *                         If it is, we will call the function setFinish() to set the good button.
+             */
             toggleStep(isLast) {
                 if (isLast !== undefined && isLast)
                     this.$.stepButtons.setFinish(true);
@@ -145,28 +257,22 @@
                 this.$.stepContent.toggle();
             }
 
-            ready() {
-                super.ready();
 
-                this.$.stepContent.addEventListener("opened-changed", this._changeState.bind(this));
+            // _changeState(event) {
+            //     // Fire event to inform the stepper that another step is clicked to close the step open if there is and 
+            //     // if its in not linear.
+            //     this.dispatchEvent(new CustomEvent('active-changed', {
+            //         bubbles: true,
+            //         composed: true
+            //     }));
+            // }
 
-                //we open the first step according the value set on the stepper element.
-                if (Caribouflex.Stepper.Context.numberOfStep === 1)
-                    this.setAttribute("__active", this._getOpenFirstStepOnStartup());
-
-                //register the element
-                this._register();
-            }
-
-            _changeState(event) {
-                // Fire event to inform the stepper that another step is clicked to close the step open if there is and 
-                // if its in not linear.
-                this.dispatchEvent(new CustomEvent('active-changed', {
-                    bubbles: true,
-                    composed: true
-                }));
-            }
-
+            /**
+             * This function is used to get the good icon to display into the badge,
+             * accordign to the 'editable' property.
+             * @param {Boolean} editable true if it's an editable step, false otherwise.
+             * @private
+             */
             _getIcon(editable) {
                 if (editable)
                     return "create";

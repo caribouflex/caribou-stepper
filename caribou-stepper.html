@@ -2,11 +2,24 @@
 <link rel="import" href="caribou-stepper-progress-mixin.html">
 <link rel="import" href="caribou-stepper-stepper-property-mixin.html">
 
+
+<!--
+`<caribou-stepper>` is an element used to 
+
+    Example:
+        '<caribou-stepper>
+        </caribou-stepper>'
+
+    ### Styling The following custom properties and mixins are available for styling: Custom property | Description | Default
+    ----------------|-------------|----------
+
+-->
 <dom-module id="caribou-stepper">
     <template>
         <style>
              :host {
                 display: block;
+                --primary-color: #2196F3;
             }
         </style>
         <slot></slot>
@@ -75,6 +88,15 @@
 
             _activeChanged(step) {
 
+            }
+
+            closeAllStep() {
+                for (var i = 0; i < this._steps.length; i++) {
+                    var step = this.getStepById(i);
+                    if (step.isActive()) {
+                        step.toggleStep();
+                    }
+                }
             }
 
             isLastStep() {

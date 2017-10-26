@@ -9,28 +9,51 @@
         return class extends superClass {
             static get properties() {
                 return {
+
+                    /**
+                     * Property used to indicate if the step is saved.
+                     * True if it's saved, false otherwise.
+                     */
                     save: {
                         type: Boolean,
                         value: false
                     },
 
+
+                    /**
+                     * Property used to indicate if the step is editable.
+                     * True if it's editable, false otherwise.
+                     */
                     editable: {
                         type: Boolean,
                         value: false
                     },
 
+
+                    /**
+                     * Property used to indicate if the step is optional.
+                     * True if it's optional, false otherwise.
+                     */
                     optional: {
                         type: Boolean,
                         value: false
                     },
 
-                    __active: {
+
+                    /**
+                     * Property used to indicate if the step is active.
+                     * If the step is active that means it will be open, and it's the current step we are focused on.
+                     * True if it's active, false otherwise.
+                     */
+                    active: {
                         type: Boolean,
-                        value: false
+                        value: false,
+                        reflectToAttribute: true
                     },
 
                     /**
                      * The continue button text value
+                     * 'Continue' by default
                      */
                     continueLabel: {
                         type: String,
@@ -39,6 +62,7 @@
 
                     /**
                      * The finish button text value
+                     * 'Finish' by default
                      */
                     finishLabel: {
                         type: String,
@@ -47,6 +71,7 @@
 
                     /**
                      * The update button text value
+                     * 'Update' by default
                      */
                     updateLabel: {
                         type: String,
@@ -55,6 +80,7 @@
 
                     /**
                      * The skip button text value
+                     * 'Skip' by default
                      */
                     skipLabel: {
                         type: String,
@@ -62,7 +88,8 @@
                     },
 
                     /**
-                     * The skip button text value
+                     * True to display the skip button, false otherwise.
+                     * If the step is linear, the skip button will do nothing, except if the property Optional is true.
                      */
                     skipButton: {
                         type: Boolean,
@@ -71,18 +98,17 @@
                 }
             }
 
-            _isPreviousSaved() {
-                //check if previous element is saved
-            }
-
-            _isNextStepSaved() {
-
-            }
-
+            /**
+             * This function is used to set the property save to true.
+             */
             saveStep() {
                 this.setAttribute("save", true);
             }
 
+            /**
+             * This function is used to open the step following this step.
+             * If all the step are saved and no step left, an event 'last-step-closed' will be fired.
+             */
             openNextStep() {
                 if (this.nextElementSibling !== undefined && this.nextElementSibling !== null && !this.nextElementSibling
                     .save) {
@@ -100,6 +126,14 @@
             }
 
             /**
+             * Getter used to know if the step is active or not.
+             * @return {Boolean} True if it is, false otherwise.
+             */
+            isActive() {
+                return this.active;
+            }
+
+            /**
              * This function is used to register an element to the parent.
              * @private
              */
@@ -107,9 +141,14 @@
                 this.parentElement._registerStep(this);
             }
 
+            /**
+             * This function is used to know if the property 'openFirstStepOnStartup' is set to true.
+             * @private
+             */ 
             _getOpenFirstStepOnStartup() {
                 return this.parentElement.openFirstStepOnStartup;
             }
+
         }
     }
 </script>

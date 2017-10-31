@@ -16,6 +16,7 @@
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
+
     </style>
   </custom-style>
 </head>
@@ -25,7 +26,7 @@
     <h3>Basic caribou-stepper demo</h3>
     <demo-snippet>
       <template>
-        <caribou-stepper>
+        <caribou-stepper id="stepper" open-first-step-on-startup>
           <caribou-step editable label="toto">
             <p>
               BFDBDBFDBF
@@ -69,9 +70,24 @@
             </p>
           </caribou-step>
         </caribou-stepper>
+
+        <button onclick="reset();">reset</button>
+        <script>
+          function reset() {
+            console.log("ffffffffffffffffffffffffffffff");
+            document.querySelector("#stepper").reset();
+          }
+        </script>
       </template>
     </demo-snippet>
   </div>
+  <button onclick="reset">reset</button>
+  <script>
+    function reset() {
+      console.log("ffffffffffffffffffffffffffffff");
+      document.querySelector("#stepper").reset();
+    }
+  </script>
 </body>
 
 </html>

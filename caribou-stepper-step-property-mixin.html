@@ -19,7 +19,6 @@
                         value: false
                     },
 
-
                     /**
                      * Property used to indicate if the step is editable.
                      * True if it's editable, false otherwise.
@@ -28,7 +27,6 @@
                         type: Boolean,
                         value: false
                     },
-
 
                     /**
                      * Property used to indicate if the step is optional.
@@ -39,7 +37,6 @@
                         value: false
                     },
 
-
                     /**
                      * Property used to indicate if the step is active.
                      * If the step is active that means it will be open, and it's the current step we are focused on.
@@ -48,7 +45,8 @@
                     active: {
                         type: Boolean,
                         value: false,
-                        reflectToAttribute: true
+                        reflectToAttribute: true,
+                        observer:'changeActiveStep'
                     },
 
                     /**
@@ -106,26 +104,6 @@
             }
 
             /**
-             * This function is used to open the step following this step.
-             * If all the step are saved and no step left, an event 'last-step-closed' will be fired.
-             */
-            openNextStep() {
-                if (this.nextElementSibling !== undefined && this.nextElementSibling !== null && !this.nextElementSibling
-                    .save) {
-                    // We toggle the step. As parameter we set if it's the last step or not
-                    // for the button.
-                    this.nextElementSibling.toggleStep(this.parentElement.isLastStep());
-
-                } else if (this.nextElementSibling !== undefined && this.nextElementSibling !== null)
-                    this.nextElementSibling.openNextStep();
-                else
-                    this.dispatchEvent(new CustomEvent('last-step-closed', {
-                        bubbles: true,
-                        composed: true
-                    }));
-            }
-
-            /**
              * Getter used to know if the step is active or not.
              * @return {Boolean} True if it is, false otherwise.
              */
@@ -149,6 +127,10 @@
                 return this.parentElement.openFirstStepOnStartup;
             }
 
+            changeActiveStep(active){
+                if(active)
+                    this.parentElement.setActiveStep(this);
+            }
         }
     }
 </script>

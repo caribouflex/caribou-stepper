@@ -2,13 +2,17 @@
 <link rel="import" href="../paper-button/paper-button.html">
 
 <!--
-`caribou-step-action-buttons`
+`caribou-step-action-buttons` is an element used to display a panel of action button used to navigate through the stepper.
+These button fires each one an event.
+
+To change the label of each button, refer to the `caribou-step` element.
+
 
 
 Custom property | Description | Default 
 ----------------|-------------|---------- 
 `--button-ink-color` | Background color of the ripple | `Based on the button's color` 
-`--button-style` | Mixin applied to the button | `{}` 
+`--button-style` | Mixin applied to the button. Refer `paper-button` element for more details. | `{}` 
 -->
 <dom-module id="caribou-step-action-buttons">
     <template>
@@ -18,14 +22,11 @@ Custom property | Description | Default
             }
 
             paper-button {
-                margin: 0;
                 --paper-button-ink-color: var(--button-ink-color);
-                --paper-button: {
-                    color: #fff;
-                    background-color: lightblue;
-                    @apply --button-style;
-                }
-                ;
+                color: #fff;
+                background-color: var(--primary-color);
+                @apply --button-style;
+                margin: 0;
             }
         </style>
 
@@ -33,7 +34,6 @@ Custom property | Description | Default
         <paper-button id="continueBtn" data-event="continue" hidden="[[__isContinueHidden]]" on-tap="_fireEvent">{{continueLabel}}</paper-button>
         <paper-button id="skipBtn" data-event="skip" hidden="[[!skipButton]]" on-tap="_fireEvent">{{skipLabel}}</paper-button>
         <paper-button id="finishBtn" data-event="finish" hidden="[[!isFinish]]" on-tap="_fireEvent">{{finishLabel}}</paper-button>
-
 
     </template>
 
@@ -47,6 +47,37 @@ Custom property | Description | Default
          * @demo demo/index.html
          */
         class CaribouStepActionButtonsElement extends Polymer.Element {
+
+            /**
+             * Fired when the continue button is clicked.
+             *
+             * @event continue-clicked
+             * @param {Object} detail empty
+             */
+
+            /**
+             * Fired when the skip button is clicked.
+             *
+             * @event skip-clicked
+             * @param {Object} detail empty
+             */
+
+            /**
+             * Fired when the update button is clicked.
+             *
+             * @event update-clicked
+             * @param {Object} detail empty
+             */
+
+            /**
+             * Fired when the finish button is clicked.
+             *
+             * @event finish-clicked
+             * @param {Object} detail empty
+             */
+
+
+
             static get is() {
                 return 'caribou-step-action-buttons';
             }
@@ -97,12 +128,25 @@ Custom property | Description | Default
                 };
             }
 
+            /**
+             * This function is used to set the 'isFinish' property.
+             * @param {Boolean} value true or false
+             */
             setFinish(value) {
                 this.isFinish = value;
             }
 
             /**
+             * This function is used to set the 'isUpdate' property.
+             * @param {Boolean} value true or false
+             */
+            setUpdate(value) {
+                this.isUpdate = value;
+            }
+
+            /**
              * This is a callback function called when one of the different button is clicked.
+             * @param {Object} e The event object
              */
             _fireEvent(e) {
                 var eventName = e.currentTarget.dataset.event;
@@ -112,12 +156,25 @@ Custom property | Description | Default
                 }));
             }
 
+            /**
+             * This function is used to set the  '__isContinueHidden' property.
+             * @param {Boolean} value true to hide the continue button, false otherwise.
+             */
             setContinueHidden(value) {
                 console.log("set continue hidden");
                 if (value)
                     this.__isContinueHidden = true;
                 else
                     this.__isContinueHidden = false;
+            }
+
+            /**
+             * This function is used to reinitialize all the parameter of this element.
+             */
+            reset() {
+                this.setContinueHidden(false);
+                this.setFinish(false);
+                this.setUpdate(false);
             }
         }
 

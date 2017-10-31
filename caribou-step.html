@@ -217,12 +217,13 @@
              */
             ready() {
                 super.ready();
-
-                //this.$.stepContent.addEventListener("opened-changed", this._changeState.bind(this));
+                var openFirst = this._getOpenFirstStepOnStartup();
 
                 //we open the first step according the value set on the stepper element.
                 if (Caribouflex.Stepper.Context.numberOfStep === 1)
-                    this.active = this._getOpenFirstStepOnStartup();
+                    this.active = openFirst;
+                else if (Caribouflex.Stepper.Context.numberOfStep === 2 && openFirst)
+                    this.parentElement.setNextStep(this);
 
                 //register the element
                 this._register();
@@ -235,12 +236,13 @@
              * @private
              */
             _toggle() {
-                if ((!this.parentElement.linear && (!this.save || this.editable)) || (this.parentElement.linear &&
+                if (!this.parentElement.finish && (!this.parentElement.linear && (!this.save || this.editable)) ||
+                    (this.parentElement.linear &&
                         this.editable)) {
                     this.parentElement.closeAllStep();
                     this.toggleStep();
                     if (this.save && this.editable)
-                        this.$.stepButtons.isUpdate = true;
+                        this.$.stepButtons.setUpdate(true);
                 }
             }
 
@@ -257,15 +259,13 @@
                 this.$.stepContent.toggle();
             }
 
-
-            // _changeState(event) {
-            //     // Fire event to inform the stepper that another step is clicked to close the step open if there is and 
-            //     // if its in not linear.
-            //     this.dispatchEvent(new CustomEvent('active-changed', {
-            //         bubbles: true,
-            //         composed: true
-            //     }));
-            // }
+            /**
+             * This function is used to set the finish action button state to true.
+             * For this step the button will display the finish button. 
+             */
+            setFinishActionButtonsState() {
+                this.$.stepButtons.setFinish(true);
+            }
 
             /**
              * This function is used to get the good icon to display into the badge,
@@ -278,6 +278,24 @@
                     return "create";
                 else
                     return "check";
+            }
+
+            /**
+             * This function is used to reinitialize all the parameter of this element 
+             * and the action buttons
+             */
+            reset(openFirstStep) {
+                this.removeAttribute("save");
+                this.active = false;
+                this.$.stepButtons.reset();
+                this.updateStyles();
+
+                if (openFirstStep) {
+                    if (this._badgeNumber === 1)
+                        this.active = true;
+                    else if (this._badgeNumber === 2)
+                        this.parentElement.setNextStep(this);
+                }
             }
         }
 

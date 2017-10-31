@@ -1,13 +1,23 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="caribou-stepper-progress-mixin.html">
 <link rel="import" href="caribou-stepper-stepper-property-mixin.html">
 
 
 <!--
-`<caribou-stepper>` is an element used to 
+`<caribou-stepper>` is an element used to display progress through a sequence of logical and numbered steps.
+    This element need to be used with the `caribou-step` element.
+    You can add the number of step you want inside your stepper.
+    You can set multiple attribute to the stepper : 
+     - linear : this require users to complete one step in order to move on to the next.
+                If linear is false, it allow users to enter a multi-step flow at any point.
+     - Mobile : TODO - This is used when there is multitude of step on a mobile view we will compact it.
+     - Horizontal : True if you want to use the stepper horizontaly. Otherwise (default) it's vertical.
+     - OpenFirstStepOnStartup : If true, the first step will be open after load time.
 
     Example:
-        '<caribou-stepper>
+        '<caribou-stepper linear>
+            <caribou-step>...</caribout-step>
+            <caribou-step>...</caribout-step>
+            <caribou-step>...</caribout-step>
         </caribou-stepper>'
 
     ### Styling The following custom properties and mixins are available for styling: Custom property | Description | Default
@@ -31,12 +41,17 @@
          * Stepper convey progress through numbered steps.
          *
          * @memberof Caribouflex
-         * @mixes Caribouflex.Stepper.ProgressMixin
          * @mixes Caribouflex.Stepper.StepperPropertyMixin
          * @demo demo/index.html
          */
-        class CaribouStepperElement extends Caribouflex.Stepper.ProgressMixin(Caribouflex.Stepper.StepperPropertyMixin(
-            Polymer.Element)) {
+        class CaribouStepperElement extends Caribouflex.Stepper.StepperPropertyMixin(Polymer.Element) {
+
+            /**
+             * Fired when the stepper is finished and all the steps are saved.
+             *
+             * @event stepper-finished
+             * @param {Object} detail empty
+             */
 
             static get is() {
                 return 'caribou-stepper';
@@ -50,46 +65,106 @@
                     _steps: {
                         type: Array,
                         value: []
+                    },
+
+                    /**
+                     * This property is toggled when the reset function is called.
+                     * When we are currently resetting the value, the property is true, false otherwise.
+                     * @readonly
+                     */
+                    isResetting: {
+                        type: Boolean,
+                        value: false,
+                        readOnly: true
                     }
                 };
             }
 
-            constructor() {
-                super();
+            /**
+             * This function is used by the `caribou-step` to register into the `caribou-stepper`.
+             * Then multiple event fired from the stepper can be handled :
+             *  - last-step-closed 
+             *  - continue-clicked : call the __nextStep() function. 
+             *  - finish-clicked : call the __nextStep() function.
+             *  - skip-clicked : call the __skipStep() function.
+             *  - update-clicked : call the __nextStep() function.
+             * 
+             *  All elements registered are added into the _steps property.
+             */
+            _registerStep(element) {
+                this.push('_steps', element);
+                // element.addEventListener("last-step-closed", this._validStepper.bind(this));
+                element.addEventListener("continue-clicked", this.__nextStep.bind(this));
+                element.addEventListener("finish-clicked", this.__finishStep.bind(this));
+                element.addEventListener("skip-clicked", this.__skipStep.bind(this));
+                element.addEventListener("update-clicked", this.__nextStep.bind(this));
             }
 
-            ready() {
-                super.ready();
+            /**
+             * This function is used to open the next step.
+             * It will save and close the current active step.
+             * Then it will open the next step if there is one.
+             */
+            openNextStep() {
+                this.activeStep.saveStep();
+                this.activeStep.toggleStep();
+                this.removeActiveStep();
+                if (this.nextStep !== null)
+                    this.nextStep.toggleStep();
             }
 
-            nextStep(e) {
-                var step = e.target;
-                step.saveStep();
-                step.toggleStep();
-                step.openNextStep();
-            }
-
-            skipStep(e) {
-                if (!this.linear) {
-                    var step = e.target;
-                    step.toggleStep();
-                    step.openNextStep();
+            /**
+             * This function is used to skip the current active step.
+             * This function can work only if we are not in linear mode.
+             * TODO : allow the 
+             */
+            skipStep() {
+                if ((this.linear && this.activeStep.optional) || !this.linear) {
+                    if (this.linear)
+                        this.activeStep.saveStep();
+                    this.activeStep.toggleStep();
+                    this.activeStep.openNextStep();
                 } else
                     console.log("can't skip you are in linear mode.");
             }
 
-            _cancelState(e) {
-                console.log("cancel");
+            /**
+             * This is a private callback function used to go to the next step when a button is clicked.
+             * This will save and close the active step, then open the next one. 
+             * @private
+             */
+            __nextStep(e) {
+                this.openNextStep();
             }
 
-            connectedCallback() {
-                super.connectedCallback();
+            /**
+             * This is a private callback function used to skip the current state and open the next one.
+             * This can be done only if we are in linear mode.
+             * @private
+             */
+            __skipStep(e) {
+                this.skipStep();
             }
 
-            _activeChanged(step) {
+            /**
+             * This is a private callback function used to skip the current state and open the next one.
+             * This can be done only if we are in linear mode.
+             * @private
+             */
+            __finishStep(e) {
+                this.openNextStep();
+                this._setFinish(true);
+                this.dispatchEvent(new CustomEvent('stepper-finished', {
+                    bubbles: true,
+                    composed: true
+                }));
 
+                console.log("caribou-stepper finished.");
             }
 
+            /**
+             * This function is used to close all the steps.
+             */
             closeAllStep() {
                 for (var i = 0; i < this._steps.length; i++) {
                     var step = this.getStepById(i);
@@ -99,40 +174,23 @@
                 }
             }
 
-            isLastStep() {
-                var stepsLength = this._steps.length;
-                var saveCpt = 0;
-                for (var i = 0; i < this._steps.length; i++) {
-                    var step = this.getStepById(i);
-                    if (step.save) {
-                        saveCpt++;
-                    }
-                }
-
-                if (stepsLength - 1 === saveCpt)
-                    return true;
-                else
-                    return false;
-            }
-
-            _validStepper() {
-                var done = true; //true if all step are valid.
+            /**
+             * This function is used to check if all steps are saved, 
+             * if not, it will open the first step in linear order that is not saved.
+             * If the stepper is finished, and event will be fired.
+             * @return {Object} The stepper to open if there is or null.
+             * @private
+             */
+            _getUnsavedStep() {
                 for (var i = 0; i < this._steps.length; i++) {
                     var step = this.getStepById(i);
                     if (!step.save) {
-                        done = false;
-                        step.toggleStep(this.isLastStep());
-                        break;
+                        if (step !== this.activeStep)
+                            return step;
                     }
                 }
 
-                if (done) {
-                    console.log("caribou-stepper finished.");
-                    this.dispatchEvent(new CustomEvent('stepper-finished', {
-                        bubbles: true,
-                        composed: true
-                    }));
-                }
+                return null;
             }
 
             /**
@@ -145,13 +203,65 @@
                 return this.get(['_steps', id])
             }
 
-            _registerStep(element) {
-                this.push('_steps', element);
-                element.addEventListener("last-step-closed", this._validStepper.bind(this));
-                element.addEventListener("continue-clicked", this.nextStep.bind(this));
-                element.addEventListener("finish-clicked", this.nextStep.bind(this));
-                element.addEventListener("skip-clicked", this.skipStep.bind(this));
-                element.addEventListener("update-clicked", this.nextStep.bind(this));
+            /**
+             * This function is used to set the active step.
+             * @param {Object} step The step object.
+             */
+            setActiveStep(step) {
+                this.activeStep = step;
+                // When we are resetting the values, the activeStep and next step depends of the 'openFirstStepOnStartup' property.
+                if (!this.isResetting) {
+                    this.setNextStep(this.findNextStep(step));
+                    if (this.nextStep === null)
+                        this.activeStep.setFinishActionButtonsState(true);
+                }
+            }
+
+            /**
+             * This function is used clear the active step property.
+             */
+            removeActiveStep() {
+                this.activeStep = null;
+            }
+
+            /**
+             * This function is used to set the nextStep property.
+             * @param {Object} step The step object
+             */
+            setNextStep(step) {
+                this.nextStep = step;
+            }
+
+            /**
+             * This function is used to find the next next following step of a specific one.
+             * @param {Object} activeStep The step from which we are looking the next possible step.
+             */
+            findNextStep(activeStep) {
+                if (activeStep.nextElementSibling !== undefined && activeStep.nextElementSibling !== null && !
+                    activeStep.nextElementSibling.save) {
+                    return activeStep.nextElementSibling;
+                } else if (activeStep.nextElementSibling !== undefined && activeStep.nextElementSibling !==
+                    null)
+                    return this.findNextStep(activeStep.nextElementSibling);
+                else {
+                    return this._getUnsavedStep();
+                }
+            }
+
+            /**
+             * This function is used to reinitialize all the parameter of this element 
+             * and from all the steppers.
+             */
+            reset() {
+                this._setIsResetting(true);
+                this._setFinish(false);
+                this.activeStep = undefined;
+                this.nextStep = undefined;
+                for (var i = 0; i < this._steps.length; i++) {
+                    var step = this.getStepById(i);
+                    step.reset(this.openFirstStepOnStartup);
+                }
+                this._setIsResetting(false);
             }
         }
 

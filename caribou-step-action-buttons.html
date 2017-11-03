@@ -34,6 +34,7 @@ Custom property | Description | Default
         <paper-button id="continueBtn" data-event="continue" hidden="[[__isContinueHidden]]" on-tap="_fireEvent">{{continueLabel}}</paper-button>
         <paper-button id="skipBtn" data-event="skip" hidden="[[!skipButton]]" on-tap="_fireEvent">{{skipLabel}}</paper-button>
         <paper-button id="finishBtn" data-event="finish" hidden="[[!isFinish]]" on-tap="_fireEvent">{{finishLabel}}</paper-button>
+        <paper-button id="backBtn" data-event="back" hidden="[[!backButton]]" on-tap="_fireEvent">{{backLabel}}</paper-button>
 
     </template>
 
@@ -76,15 +77,26 @@ Custom property | Description | Default
              * @param {Object} detail empty
              */
 
-
+            /**
+             * Fired when the back button is clicked.
+             *
+             * @event back-clicked
+             * @param {Object} detail empty
+             */
 
             static get is() {
                 return 'caribou-step-action-buttons';
             }
+
             static get properties() {
                 return {
 
                     skipButton: {
+                        type: Boolean,
+                        value: false
+                    },
+
+                    backButton: {
                         type: Boolean,
                         value: false
                     },
@@ -105,6 +117,11 @@ Custom property | Description | Default
                         value: false,
                         observer: 'setContinueHidden'
                     },
+
+                    /**
+                     * The back button text value
+                     */
+                    backLabel: String,
 
                     /**
                      * The continue button text value
@@ -161,7 +178,6 @@ Custom property | Description | Default
              * @param {Boolean} value true to hide the continue button, false otherwise.
              */
             setContinueHidden(value) {
-                console.log("set continue hidden");
                 if (value)
                     this.__isContinueHidden = true;
                 else

@@ -46,7 +46,7 @@
                         type: Boolean,
                         value: false,
                         reflectToAttribute: true,
-                        observer:'changeActiveStep'
+                        observer: 'changeActiveStep'
                     },
 
                     /**
@@ -91,6 +91,24 @@
                      */
                     skipButton: {
                         type: Boolean,
+                        value: false,
+                        reflectToAttribute: true
+                    },
+
+                    /**
+                     * The back button text value
+                     * 'Back' by default
+                     */
+                    backLabel: {
+                        type: String,
+                        value: "Back"
+                    },
+
+                    /**
+                     * True to display the back button, false otherwise.
+                     */
+                    backButton: {
+                        type: Boolean,
                         value: false
                     }
                 }
@@ -122,13 +140,13 @@
             /**
              * This function is used to know if the property 'openFirstStepOnStartup' is set to true.
              * @private
-             */ 
+             */
             _getOpenFirstStepOnStartup() {
                 return this.parentElement.openFirstStepOnStartup;
             }
 
-            changeActiveStep(active){
-                if(active)
+            changeActiveStep(active) {
+                if (active)
                     this.parentElement.setActiveStep(this);
             }
         }

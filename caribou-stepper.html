@@ -31,6 +31,10 @@
                 display: block;
                 --primary-color: #2196F3;
             }
+
+             :host([horizontal]) {
+                @apply --layout-horizontal;
+            }
         </style>
         <slot></slot>
     </template>
@@ -97,6 +101,7 @@
                 element.addEventListener("continue-clicked", this.__nextStep.bind(this));
                 element.addEventListener("finish-clicked", this.__finishStep.bind(this));
                 element.addEventListener("skip-clicked", this.__skipStep.bind(this));
+                element.addEventListener("back-clicked", this.__previousStep.bind(this));
                 element.addEventListener("update-clicked", this.__nextStep.bind(this));
             }
 
@@ -114,6 +119,18 @@
             }
 
             /**
+             * This function is used to open the next step.
+             * It will save and close the current active step.
+             * Then it will open the next step if there is one.
+             */
+            openPreviousStep() {
+                this.activeStep.toggleStep();
+                this.removeActiveStep();
+                if (this.previousStep !== null)
+                    this.previousStep.toggleStep();
+            }
+
+            /**
              * This function is used to skip the current active step.
              * This function can work only if we are not in linear mode.
              * TODO : allow the 
@@ -123,7 +140,8 @@
                     if (this.linear)
                         this.activeStep.saveStep();
                     this.activeStep.toggleStep();
-                    this.activeStep.openNextStep();
+                    if (this.nextStep !== null)
+                        this.nextStep.toggleStep();
                 } else
                     console.log("can't skip you are in linear mode.");
             }
@@ -144,6 +162,15 @@
              */
             __skipStep(e) {
                 this.skipStep();
+            }
+
+            /**
+             * This is a private callback function used to skip the current state and open the next one.
+             * This can be done only if we are in linear mode.
+             * @private
+             */
+            __previousStep(e) {
+                this.openPreviousStep();
             }
 
             /**
@@ -177,7 +204,7 @@
             /**
              * This function is used to check if all steps are saved, 
              * if not, it will open the first step in linear order that is not saved.
-             * If the stepper is finished, and event will be fired.
+             * 
              * @return {Object} The stepper to open if there is or null.
              * @private
              */
@@ -185,6 +212,25 @@
                 for (var i = 0; i < this._steps.length; i++) {
                     var step = this.getStepById(i);
                     if (!step.save) {
+                        if (step !== this.activeStep)
+                            return step;
+                    }
+                }
+
+                return null;
+            }
+
+            /**
+             * This function is used to check all the previous step the the active one.
+             * If there is a step that is not saved or editabled, we returned it.
+             * 
+             * @return {Object} The stepper to open if there is or null.
+             * @private
+             */
+            _getPreviousStep() {
+                for (var i = this.activeStep._badgeNumber - 1; i == 0; i--) {
+                    var step = this.getStepById(i);
+                    if (!step.save || step.editable) {
                         if (step !== this.activeStep)
                             return step;
                     }
@@ -212,6 +258,7 @@
                 // When we are resetting the values, the activeStep and next step depends of the 'openFirstStepOnStartup' property.
                 if (!this.isResetting) {
                     this.setNextStep(this.findNextStep(step));
+                    this.setPreviousStep(this.findPreviousStep(step));
                     if (this.nextStep === null)
                         this.activeStep.setFinishActionButtonsState(true);
                 }
@@ -233,6 +280,14 @@
             }
 
             /**
+             * This function is used to set the previousStep property.
+             * @param {Object} step The step object
+             */
+            setPreviousStep(step) {
+                this.previousStep = step;
+            }
+
+            /**
              * This function is used to find the next next following step of a specific one.
              * @param {Object} activeStep The step from which we are looking the next possible step.
              */
@@ -245,6 +300,27 @@
                     return this.findNextStep(activeStep.nextElementSibling);
                 else {
                     return this._getUnsavedStep();
+                }
+            }
+
+            /**
+             * This function is used to find the next next following step of a specific one.
+             * @param {Object} activeStep The step from which we are looking the next possible step.
+             */
+            findPreviousStep(activeStep) {
+                if (activeStep.previousElementSibling !== undefined && activeStep.previousElementSibling ===
+                    null)
+                    return activeStep.previousElementSibling;
+
+                if (activeStep.previousElementSibling !== undefined && activeStep.previousElementSibling !==
+                    null && (!activeStep.previousElementSibling.save || activeStep.previousElementSibling.editable)
+                ) {
+                    return activeStep.previousElementSibling;
+                } else if (activeStep.previousElementSibling !== undefined && activeStep.previousElementSibling !==
+                    null)
+                    return this.findPreviousStep(activeStep.previousElementSibling);
+                else {
+                    return this._getPreviousStep();
                 }
             }
 

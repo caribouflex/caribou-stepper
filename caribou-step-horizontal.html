@@ -44,11 +44,11 @@
      `--step-badge-color`| Initial color of the badge | `#9E9E9E`
      `--step-badge-content-color`| Color of the number and the icon inside the badge | `#FFFFFF`
 -->
-<dom-module id="caribou-step">
+<dom-module id="caribou-step-horizontal">
     <template>
         <style>
              :host {
-                /* display: block; */
+                display: block;
             }
             /* General */
 
@@ -68,8 +68,9 @@
                 position: relative;
                 justify-content: flex-start;
             }
+            /* :host([horizontal]) paper-button:after { */
 
-             :host([horizontal]) paper-button:after {
+            paper-button:after {
                 content: '';
                 border-top: 1px solid var(--step-connector-line-color, #BDBDBD);
                 width: 100%;
@@ -151,6 +152,7 @@
             <div id="labelBtn">{{label}}
                 <span id="subtitle">Optional</span>
             </div>
+
         </paper-button>
         <div class="layout">
             <iron-collapse id="stepContent" opened="{{active}}">
@@ -174,7 +176,7 @@
          * @mixes Caribouflex.Stepper.StepPropertyMixin
          * @demo demo/index.html
          */
-        class CaribouStepElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
+        class CaribouStepHorizontalElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
 
             /**
              * Fired when the last step has been finished.
@@ -186,7 +188,7 @@
              */
 
             static get is() {
-                return 'caribou-step';
+                return 'caribou-step-horizontal';
             }
 
             static get properties() {
@@ -312,12 +314,12 @@
             }
         }
 
-        window.customElements.define(CaribouStepElement.is, CaribouStepElement);
+        window.customElements.define(CaribouStepHorizontalElement.is, CaribouStepHorizontalElement);
 
         /**
          * @namespace Caribouflex
          */
         window.Caribouflex = window.Caribouflex || {};
-        Caribouflex.CaribouStepElement = CaribouStepElement;
+        Caribouflex.CaribouStepHorizontalElement = CaribouStepHorizontalElement;
     </script>
 </dom-module>

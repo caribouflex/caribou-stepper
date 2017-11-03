@@ -27,7 +27,10 @@
     <demo-snippet>
       <template>
         <caribou-stepper id="stepper" open-first-step-on-startup>
-          <caribou-step editable label="toto">
+          <caribou-step editable label="toto" back-button back-label="patate">
+            <div style="width:500px;height:400px;background-color:lightgreen"></div>
+          </caribou-step>
+          <caribou-step label="tytyyyyyy" skip-button optional back-button back-label="patate">
             <p>
               BFDBDBFDBF
             </p>
@@ -41,21 +44,7 @@
               BFDBDFBFDBF
             </p>
           </caribou-step>
-          <caribou-step label="tyty" skip-button optional>
-            <p>
-              BFDBDBFDBF
-            </p>
-            <p>
-              BFDBFDBFDFBD
-            </p>
-            <p>
-              BFDBFDFDBF
-            </p>
-            <p>
-              BFDBDFBFDBF
-            </p>
-          </caribou-step>
-          <caribou-step label="tutu">
+          <caribou-step label="tutu" back-button>
             <p>
               BFDBDBFDBF
             </p>
@@ -74,7 +63,6 @@
         <button onclick="reset();">reset</button>
         <script>
           function reset() {
-            console.log("ffffffffffffffffffffffffffffff");
             document.querySelector("#stepper").reset();
           }
         </script>
@@ -84,7 +72,6 @@
   <button onclick="reset">reset</button>
   <script>
     function reset() {
-      console.log("ffffffffffffffffffffffffffffff");
       document.querySelector("#stepper").reset();
     }
   </script>

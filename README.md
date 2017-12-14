@@ -10,6 +10,7 @@ Anything can be inserted into each step.
 All the elements can be customized refer to the styling section.
 
 ### Incoming (TODO)
+- Bug Fixes
 - IE11 support
 - Horizontal stepper
 - Mobile stepper
@@ -26,12 +27,14 @@ For the styling check the `<caribou-stepper>`, `<caribou-step>` and `<caribou-st
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../paper-input/paper-input.html"></script>
-    <script src="../iron-icon/iron-icon.html"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-icon/iron-icon.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/iron-icons/iron-icons.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-input/paper-input.html">
     <link rel="import" href="caribou-stepper.html">
     <link rel="import" href="caribou-step.html">
-    <style>
-    </style>
+    <link rel="import" href="custom-icons.html">
+    <style>html{font-family: 'Roboto', sans-serif;}</style>
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -39,28 +42,28 @@ For the styling check the `<caribou-stepper>`, `<caribou-step>` and `<caribou-st
 -->
 
 ```html
-<caribou-stepper linear>
-    <caribou-step label="Step 1" open-first-step-on-startup>
-       <paper-input always-float-label label="Surname 1"></paper-input>
-        <paper-input label="Username 1">
-            <iron-icon icon="mail" slot="prefix"></iron-icon>
-            <div slot="suffix">@email.com</div>
-        </paper-input>
-    </caribout-step>
-    <caribou-step label="Step 2">
-       <paper-input always-float-label label="Surname 2"></paper-input>
-        <paper-input label="Username 2">
-            <iron-icon icon="mail" slot="prefix"></iron-icon>
-            <div slot="suffix">@email.com</div>
-        </paper-input>
-    </caribout-step>
-    <caribou-step label="Step 3">
-        <paper-input always-float-label label="Surname 3"></paper-input>
-        <paper-input label="Username 3">
-            <iron-icon icon="mail" slot="prefix"></iron-icon>
-            <div slot="suffix">@email.com</div>
-        </paper-input>
-    </caribout-step>
+<caribou-stepper linear open-first-step-on-startup>
+	<caribou-step label="Step 1" open-first-step-on-startup>
+  		<paper-input always-float-label label="Surname 1"></paper-input>
+      	<paper-input label="Username 1">
+        	<iron-icon icon="mail" slot="prefix"></iron-icon>
+        	<div slot="suffix">@email.com</div>
+      	</paper-input>
+  	</caribou-step>
+    <caribou-step label="Step 2" open-first-step-on-startup>
+  		<paper-input always-float-label label="Surname 2"></paper-input>
+      	<paper-input label="Username 2">
+        	<iron-icon icon="mail" slot="prefix"></iron-icon>
+        	<div slot="suffix">@email.com</div>
+      	</paper-input>
+  	</caribou-step>
+    <caribou-step label="Step 3" open-first-step-on-startup>
+  		<paper-input always-float-label label="Surname 3"></paper-input>
+      	<paper-input label="Username 3">
+        	<iron-icon icon="mail" slot="prefix"></iron-icon>
+        	<div slot="suffix">@email.com</div>
+      	</paper-input>
+  	</caribou-step>
 </caribou-stepper>
 ```
 

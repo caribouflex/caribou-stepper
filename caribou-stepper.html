@@ -2,26 +2,27 @@
 <link rel="import" href="caribou-stepper-stepper-property-mixin.html">
 
 
+
 <!--
 `<caribou-stepper>` is an element used to display progress through a sequence of logical and numbered steps.
-    This element need to be used with the `caribou-step` element.
-    You can add the number of step you want inside your stepper.
-    You can set multiple attribute to the stepper : 
-     - linear : this require users to complete one step in order to move on to the next.
-                If linear is false, it allow users to enter a multi-step flow at any point.
-     - Mobile : TODO - This is used when there is multitude of step on a mobile view we will compact it.
-     - Horizontal : True if you want to use the stepper horizontaly. Otherwise (default) it's vertical.
-     - OpenFirstStepOnStartup : If true, the first step will be open after load time.
+This element need to be used with the `caribou-step` element.
+You can add the number of step you want inside your stepper.
+You can set multiple attribute to the stepper : 
+    - linear : this require users to complete one step in order to move on to the next.
+            If linear is false, it allow users to enter a multi-step flow at any point.
+    - Mobile : TODO - This is used when there is multitude of step on a mobile view we will compact it.
+    - Horizontal : True if you want to use the stepper horizontaly. Otherwise (default) it's vertical.
+    - OpenFirstStepOnStartup : If true, the first step will be open after load time.
 
-    Example:
-        '<caribou-stepper linear>
-            <caribou-step>...</caribout-step>
-            <caribou-step>...</caribout-step>
-            <caribou-step>...</caribout-step>
-        </caribou-stepper>'
+Example:
+    '<caribou-stepper linear>
+        <caribou-step>...</caribout-step>
+        <caribou-step>...</caribout-step>
+        <caribou-step>...</caribout-step>
+    </caribou-stepper>'
 
-    ### Styling The following custom properties and mixins are available for styling: Custom property | Description | Default
-    ----------------|-------------|----------
+### Styling The following custom properties and mixins are available for styling: Custom property | Description | Default
+----------------|-------------|----------
 
 -->
 <dom-module id="caribou-stepper">
@@ -70,7 +71,9 @@
                      */
                     _steps: {
                         type: Array,
-                        value: []
+                        value: function () {
+                            return [];
+                        }
                     },
 
                     /**
@@ -105,47 +108,6 @@
                 element.addEventListener("skip-clicked", this.__skipStep.bind(this));
                 element.addEventListener("back-clicked", this.__previousStep.bind(this));
                 element.addEventListener("update-clicked", this.__nextStep.bind(this));
-            }
-
-            /**
-             * This function is used to open the next step.
-             * It will save and close the current active step.
-             * Then it will open the next step if there is one.
-             */
-            openNextStep() {
-                this.activeStep.saveStep();
-                this.activeStep.toggleStep();
-                this.removeActiveStep();
-                if (this.nextStep !== null)
-                    this.nextStep.toggleStep();
-            }
-
-            /**
-             * This function is used to open the next step.
-             * It will save and close the current active step.
-             * Then it will open the next step if there is one.
-             */
-            openPreviousStep() {
-                this.activeStep.toggleStep();
-                this.removeActiveStep();
-                if (this.previousStep !== null)
-                    this.previousStep.toggleStep();
-            }
-
-            /**
-             * This function is used to skip the current active step.
-             * This function can work only if we are not in linear mode.
-             * TODO : allow the 
-             */
-            skipStep() {
-                if ((this.linear && this.activeStep.optional) || !this.linear) {
-                    if (this.linear)
-                        this.activeStep.saveStep();
-                    this.activeStep.toggleStep();
-                    if (this.nextStep !== null)
-                        this.nextStep.toggleStep();
-                } else
-                    console.log("can't skip you are in linear mode.");
             }
 
             /**
@@ -189,6 +151,47 @@
                 }));
 
                 console.log("caribou-stepper finished.");
+            }
+
+            /**
+             * This function is used to open the next step.
+             * It will save and close the current active step.
+             * Then it will open the next step if there is one.
+             */
+            openNextStep() {
+                this.activeStep.saveStep();
+                this.activeStep.toggleStep();
+                this.removeActiveStep();
+                if (this.nextStep !== null)
+                    this.nextStep.toggleStep();
+            }
+
+            /**
+             * This function is used to open the next step.
+             * It will save and close the current active step.
+             * Then it will open the next step if there is one.
+             */
+            openPreviousStep() {
+                this.activeStep.toggleStep();
+                this.removeActiveStep();
+                if (this.previousStep !== null)
+                    this.previousStep.toggleStep();
+            }
+
+            /**
+             * This function is used to skip the current active step.
+             * This function can work only if we are not in linear mode.
+             * TODO : allow the 
+             */
+            skipStep() {
+                if ((this.linear && this.activeStep.optional) || !this.linear) {
+                    if (this.linear)
+                        this.activeStep.saveStep();
+                    this.activeStep.toggleStep();
+                    if (this.nextStep !== null)
+                        this.nextStep.toggleStep();
+                } else
+                    console.log("can't skip you are in linear mode.");
             }
 
             /**

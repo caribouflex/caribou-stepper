@@ -27,39 +27,16 @@
     <demo-snippet>
       <template>
         <caribou-stepper id="stepper" open-first-step-on-startup>
-          <caribou-step editable label="toto" back-button back-label="patate">
-            <div style="width:500px;height:400px;background-color:lightgreen"></div>
+          <caribou-step id="stepper1step1"  editable label="Step 1" back-button back-label="Back to the previous">
+            <div style="width:100%;height:200px;background-color:lightgreen">Content 1</div>
           </caribou-step>
-          <caribou-step label="tytyyyyyy" skip-button optional back-button back-label="patate">
-            <p>
-              BFDBDBFDBF
-            </p>
-            <p>
-              BFDBFDBFDFBD
-            </p>
-            <p>
-              BFDBFDFDBF
-            </p>
-            <p>
-              BFDBDFBFDBF
-            </p>
+          <caribou-step id="stepper1step2" label="Step 2" skip-button optional back-button back-label="<--">
+            <div style="width:100%;height:200px;background-color:lightblue">Content 2</div>
           </caribou-step>
-          <caribou-step label="tutu" back-button>
-            <p>
-              BFDBDBFDBF
-            </p>
-            <p>
-              BFDBFDBFDFBD
-            </p>
-            <p>
-              BFDBFDFDBF
-            </p>
-            <p>
-              BFDBDFBFDBF
-            </p>
+          <caribou-step id="stepper1step3" label="Step 3" back-button>
+            <div style="width:100%;height:200px;background-color:lightgray">Content 3</div>
           </caribou-step>
         </caribou-stepper>
-
         <button onclick="reset();">reset</button>
         <script>
           function reset() {

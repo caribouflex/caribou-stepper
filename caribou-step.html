@@ -218,11 +218,16 @@ Custom property | Description | Default
              */
             constructor() {
                 super();
-
                 //init the badge value
                 Caribouflex.Stepper.Context.numberOfStep = Caribouflex.Stepper.Context.numberOfStep ===
                     undefined ? 1 : Caribouflex.Stepper.Context.numberOfStep + 1;
+
                 this._set_badgeNumber(Caribouflex.Stepper.Context.numberOfStep);
+
+                //if there is no step behind, we clear the number of step context temp we used.
+                if (this.nextElementSibling === null)
+                    Caribouflex.Stepper.Context.numberOfStep = undefined;
+
             }
 
             /**
@@ -235,9 +240,9 @@ Custom property | Description | Default
                 var openFirst = this._getOpenFirstStepOnStartup();
 
                 //we open the first step according the value set on the stepper element.
-                if (Caribouflex.Stepper.Context.numberOfStep === 1)
+                if (this._badgeNumber === 1)
                     this.active = openFirst;
-                else if (Caribouflex.Stepper.Context.numberOfStep === 2 && openFirst)
+                else if (this._badgeNumber === 2 && openFirst)
                     this.parentElement.setNextStep(this);
 
                 //register the element
@@ -312,6 +317,7 @@ Custom property | Description | Default
                         this.parentElement.setNextStep(this);
                 }
             }
+            
         }
 
         window.customElements.define(CaribouStepElement.is, CaribouStepElement);

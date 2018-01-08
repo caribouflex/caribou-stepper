@@ -33,7 +33,7 @@ For the styling check the `<caribou-stepper>`, `<caribou-step>` and `<caribou-st
     <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/2.3.1/lib/paper-input/paper-input.html">
     <link rel="import" href="caribou-stepper.html">
     <link rel="import" href="caribou-step.html">
-    <link rel="import" href="custom-icons.html">
+    <link rel="import" href="caribou-stepper-custom-icons.html">
     <style>html{font-family: 'Roboto', sans-serif;}</style>
     <next-code-block></next-code-block>
   </template>

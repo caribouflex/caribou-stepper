@@ -2,7 +2,7 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-collapse/iron-collapse.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="custom-icons.html">
+<link rel="import" href="caribou-stepper-custom-icons.html">
 <link rel="import" href="caribou-step-action-buttons.html">
 <link rel="import" href="caribou-stepper-step-property-mixin.html">
 
@@ -147,7 +147,7 @@
         </style>
 
         <paper-button on-tap="_toggle">
-            <iron-icon id="iconBtn" icon="custom-icons:[[_getIcon(editable)]]"></iron-icon>
+            <iron-icon id="iconBtn" icon="caribou-stepper-custom-icons:[[_getIcon(editable)]]"></iron-icon>
             <span class="badgeNumber">{{_badgeNumber}}</span>
             <div id="labelBtn">{{label}}
                 <span id="subtitle">Optional</span>

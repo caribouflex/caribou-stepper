@@ -159,11 +159,15 @@ Example:
              * Then it will open the next step if there is one.
              */
             openNextStep() {
-                this.activeStep.saveStep();
-                this.activeStep.toggleStep();
-                this.removeActiveStep();
-                if (this.nextStep !== null)
-                    this.nextStep.toggleStep();
+                if (this.activeStep.validate()) {
+                    this.activeStep.saveStep();
+                    this.activeStep.toggleStep();
+                    this.removeActiveStep();
+                    if (this.nextStep !== null)
+                        this.nextStep.toggleStep();
+                } else {
+                    this.activeStep.fireInvalidStep();
+                }
             }
 
             /**

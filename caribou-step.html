@@ -34,15 +34,17 @@ Example:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-    `--step-connector-line-color` | Color of the line that connect the steps | `#BDBDBD` 
-    `--step-saved-label-color` | Color of the label once it's saved | `#424242`
-    `--step-active-label-color`| Color of the label when the step is active | `#424242`
-    `--step-label-color`| Initial color of the label | `#E0E0E0`
-    `--step-badge-height`| The height of the badge (without border) | `18px`
-    `--step-badge-width`| The width of the badge (without border) | `18px`
-    `--step-save-badge-color`| Color of the badge once the step is saved | `--primary-color`
-    `--step-badge-color`| Initial color of the badge | `#9E9E9E`
-    `--step-badge-content-color`| Color of the number and the icon inside the badge | `#FFFFFF`
+`--step-connector-line-color` | Color of the line that connect the steps | `#BDBDBD` 
+`--step-saved-label-color` | Color of the label once it's saved | `#424242`
+`--step-active-label-color`| Color of the label when the step is active | `#424242`
+`--step-label-color`| Initial color of the label | `#E0E0E0`
+`--step-badge-height`| The height of the badge (without border) | `18px`
+`--step-badge-width`| The width of the badge (without border) | `18px`
+`--step-save-badge-color`| Color of the badge once the step is saved | `--primary-color`
+`--step-badge-color`| Initial color of the badge | `#9E9E9E`
+`--step-badge-content-color`| Color of the number and the icon inside the badge | `#FFFFFF`
+
+
 -->
 <dom-module id="caribou-step">
     <template>
@@ -143,6 +145,10 @@ Custom property | Description | Default
                 background-color: var(--step-badge-color, #9E9E9E);
                 color: var(--step-badge-content-color, #FFFFFF);
             }
+
+            caribou-step-action-buttons paper-button {
+                @apply --button-style;
+            }
         </style>
 
         <paper-button on-tap="_toggle">
@@ -184,6 +190,13 @@ Custom property | Description | Default
              * Bubble event.
              *
              * @event last-step-closed
+             * @param {Object} detail empty
+             */
+
+            /**
+             * Fired when the step is invalid to the validation the user defined.
+             *
+             * @event step-invalid
              * @param {Object} detail empty
              */
 
@@ -317,7 +330,14 @@ Custom property | Description | Default
                         this.parentElement.setNextStep(this);
                 }
             }
-            
+
+            fireInvalidStep() {
+                this.dispatchEvent(new CustomEvent('step-invalid', {
+                    bubbles: true,
+                    composed: true
+                }));
+            }
+
         }
 
         window.customElements.define(CaribouStepElement.is, CaribouStepElement);

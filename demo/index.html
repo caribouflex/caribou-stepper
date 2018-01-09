@@ -16,7 +16,12 @@
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
-
+      #stepper1step1 {
+        --button-style: {
+          text-transform: capitalize;
+          background-color: lightgrey;
+        }
+      }
     </style>
   </custom-style>
 </head>
@@ -27,7 +32,8 @@
     <demo-snippet>
       <template>
         <caribou-stepper id="stepper" open-first-step-on-startup>
-          <caribou-step id="stepper1step1"  editable label="Step 1" back-button back-label="Back to the previous">
+          <caribou-step id="stepper1step1" editable label="Step 1" back-button back-label="Back to the previous">
+            <input type="checkbox" id="checkboxValid">Check to continue.
             <div style="width:100%;height:200px;background-color:lightgreen">Content 1</div>
           </caribou-step>
           <caribou-step id="stepper1step2" label="Step 2" skip-button optional back-button back-label="<--">
@@ -42,16 +48,13 @@
           function reset() {
             document.querySelector("#stepper").reset();
           }
+          document.querySelector("#stepper1step1").validate = function () {
+            return document.querySelector("#checkboxValid").checked;
+          }
         </script>
       </template>
     </demo-snippet>
   </div>
-  <button onclick="reset">reset</button>
-  <script>
-    function reset() {
-      document.querySelector("#stepper").reset();
-    }
-  </script>
 </body>
 
 </html>

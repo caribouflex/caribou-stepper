@@ -13,34 +13,42 @@
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../caribou-stepper.html">
   <link rel="import" href="../caribou-step.html">
+  <link rel="import" href="../../paper-input/paper-input.html">
+  <link rel="import" href="../../paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="../../paper-button/paper-button.html">
+  <link rel="import" href="click-button.html">
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
-      #stepper1step1 {
-        --button-style: {
-          text-transform: capitalize;
-          background-color: lightgrey;
-        }
-      }
+
     </style>
   </custom-style>
 </head>
 
 <body>
   <div class="vertical-section-container centered">
-    <h3>Basic caribou-stepper demo</h3>
+    <h3>Classic stepper</h3>
     <demo-snippet>
       <template>
-        <caribou-stepper id="stepper" open-first-step-on-startup>
-          <caribou-step id="stepper1step1" editable label="Step 1" back-button back-label="Back to the previous">
-            <input type="checkbox" id="checkboxValid">Check to continue.
-            <div style="width:100%;height:200px;background-color:lightgreen">Content 1</div>
+        <caribou-stepper id="stepper">
+          <caribou-step id="stepper1step1" label="Personal">
+            <paper-input label="First Name"></paper-input>
+            <paper-input label="Last Name"></paper-input>
           </caribou-step>
-          <caribou-step id="stepper1step2" label="Step 2" skip-button optional back-button back-label="<--">
-            <div style="width:100%;height:200px;background-color:lightblue">Content 2</div>
+          <caribou-step id="stepper1step2" label="Hobbies" editable>
+            <div style="padding:5px;">
+              <paper-checkbox>Soccer</paper-checkbox>
+              <paper-checkbox>Backetball</paper-checkbox>
+              <paper-checkbox>Tennis</paper-checkbox>
+              <paper-checkbox>Fishing</paper-checkbox>
+            </div>
           </caribou-step>
-          <caribou-step id="stepper1step3" label="Step 3" back-button>
-            <div style="width:100%;height:200px;background-color:lightgray">Content 3</div>
+          <caribou-step id="stepper1step3" label="Movies">
+            <div style="padding:5px;">
+              <paper-checkbox>Star Wars</paper-checkbox>
+              <p>Or</p>
+              <paper-checkbox>Star Trek</paper-checkbox>
+            </div>
           </caribou-step>
         </caribou-stepper>
         <button onclick="reset();">reset</button>
@@ -48,8 +56,75 @@
           function reset() {
             document.querySelector("#stepper").reset();
           }
-          document.querySelector("#stepper1step1").validate = function () {
-            return document.querySelector("#checkboxValid").checked;
+        </script>
+      </template>
+    </demo-snippet>
+  </div>
+
+  <div class="vertical-section-container centered">
+    <h3>Stepper with step validation</h3>
+    <p>An event is fired when the step is not valid. (Check the console)</p>
+    <demo-snippet>
+      <template>
+        <caribou-stepper id="stepper2">
+          <caribou-step id="stepper2step1" label="Find the good checkbox to continue">
+            <div style="padding:5px;">
+              <paper-checkbox id="chk1">1</paper-checkbox>
+              <paper-checkbox id="chk2">2</paper-checkbox>
+              <paper-checkbox id="chk3">3</paper-checkbox>
+            </div>
+          </caribou-step>
+          <caribou-step id="stepper2step2" label="Click 3 times to continue">
+            <click-button id="clickButton"></click-button>
+          </caribou-step>
+          <caribou-step id="stepper2step3" label="Write 12345">
+            <paper-input id="step3Input" placeholder="Find the code.."></paper-input>
+          </caribou-step>
+        </caribou-stepper>
+        <button onclick="reset();">reset</button>
+        <script>
+          function reset() {
+            document.querySelector("#stepper2").reset();
+          }
+          document.querySelector("#stepper2step1").validate = function () {
+            return document.querySelector("#chk3").checked;
+          }
+          document.querySelector("#stepper2step2").validate = function () {
+            return document.querySelector("#clickButton").isValid();
+          }
+          document.querySelector("#stepper2step3").validate = function () {
+            var el = document.querySelector("#step3Input");
+            return el.value === "12345";
+          }
+
+          document.querySelector("#stepper2").addEventListener("step-invalid", function () {
+            console.log("Invalid Step");
+          })
+        </script>
+      </template>
+    </demo-snippet>
+  </div>
+
+  <div class="vertical-section-container centered">
+    <h3>Step with back and skip button</h3>
+    <p>The name of the button can be changed by stepper.</p>
+    <demo-snippet>
+      <template>
+        <caribou-stepper id="stepper3">
+          <caribou-step id="stepper3step1" label="Step 1">
+            <h1>Content 1</h1>
+          </caribou-step>
+          <caribou-step id="stepper3step2" label="Step 2" skip-button back-button>
+            <h1>Content 2</h1>
+          </caribou-step>
+          <caribou-step id="stepper3step3" label="Step 3" back-button>
+            <h1>Content 3</h1>
+          </caribou-step>
+        </caribou-stepper>
+        <button onclick="reset();">reset</button>
+        <script>
+          function reset() {
+            document.querySelector("#stepper3").reset();
           }
         </script>
       </template>

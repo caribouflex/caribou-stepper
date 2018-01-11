@@ -13,7 +13,9 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
-    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1"
+    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
+    "paper-input": "PolymerElements/paper-input#^2.0.5",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"

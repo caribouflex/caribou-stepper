@@ -6,46 +6,7 @@
 <link rel="import" href="caribou-step-action-buttons.html">
 <link rel="import" href="caribou-stepper-step-property-mixin.html">
 
-<!--
-`<caribou-step>` is an element that need to be surrounded by a `<caribou-stepper>` element.
 
-This element correspond correspond to one step of the all stepper.
-It can be Editable and Optional. 
-These both values corresponds to property that can be set on this element.
-Also you can choose the name of each buttons step.
-If the stepper is set as Linear, the Skip button will do nothing except if the property Optional is set.
-
-You can add whatever you want inside the `<caribou-step>` element tag.
-
-Each steps will be numbered following the order added into the stepper.
-
-Example:
-'<caribou-step label="Information" skip-button optional>
-<paper-input always-float-label label="Surname"></paper-input>
-<paper-input label="username">
-    <iron-icon icon="mail" slot="prefix"></iron-icon>
-    <div slot="suffix">@email.com</div>
-</paper-input>
-</caribou-step>'
-
-### Styling The following custom properties and mixins are available for styling: 
-
-**For the '--step-badge-width' and the '--step-badge-height', there is a border (6px) added to the badge that could not be changed.
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--step-connector-line-color` | Color of the line that connect the steps | `#BDBDBD` 
-`--step-saved-label-color` | Color of the label once it's saved | `#424242`
-`--step-active-label-color`| Color of the label when the step is active | `#424242`
-`--step-label-color`| Initial color of the label | `#E0E0E0`
-`--step-badge-height`| The height of the badge (without border) | `18px`
-`--step-badge-width`| The width of the badge (without border) | `18px`
-`--step-save-badge-color`| Color of the badge once the step is saved | `--primary-color`
-`--step-badge-color`| Initial color of the badge | `#9E9E9E`
-`--step-badge-content-color`| Color of the number and the icon inside the badge | `#FFFFFF`
-
-
--->
 <dom-module id="caribou-step">
     <template>
         <style>
@@ -173,14 +134,49 @@ Custom property | Description | Default
         Caribouflex.Stepper.Context = Caribouflex.Stepper.Context || {};
 
         /**
-         * `caribou-step`
-         * one step
-         *
-         * @customElement
+         * `<caribou-step>` is an element that need to be surrounded by a `<caribou-stepper>` element.
+         * 
+         * This element correspond correspond to one step of the all stepper.
+         * It can be Editable and Optional. 
+         * These both values corresponds to property that can be set on this element.
+         * Also you can choose the name of each buttons step.
+         * If the stepper is set as Linear, the Skip button will do nothing except if the property Optional is set.
+         *         
+         * You can add whatever you want inside the `<caribou-step>` element tag.
+         * 
+         * Each steps will be numbered following the order added into the stepper.
+         * 
+         * Example:
+         * ```html
+         * <caribou-step label="Information" skip-button optional>
+         * 	<paper-input always-float-label label="Surname"></paper-input>
+         * 	<paper-input label="username">
+         * 		<iron-icon icon="mail" slot="prefix"></iron-icon>
+         * 		<div slot="suffix">@email.com</div>
+         * 	</paper-input>
+         * </caribou-step>
+         * ```
+         * 
+         * ### Styling The following custom properties and mixins are available for styling: 
+         * 
+         * For the `--step-badge-width` and the `--step-badge-height`, there is a border (6px) added to the badge that could not be changed.
+         * 
+         * Custom property | Description | Default
+         * ----------------|-------------|----------
+         * `--step-connector-line-color` | Color of the line that connect the steps | `#BDBDBD` 
+         * `--step-saved-label-color` | Color of the label once it's saved | `#424242`
+         * `--step-active-label-color`| Color of the label when the step is active | `#424242`
+         * `--step-label-color`| Initial color of the label | `#E0E0E0`
+         * `--step-badge-height`| The height of the badge (without border) | `18px`
+         * `--step-badge-width`| The width of the badge (without border) | `18px`
+         * `--step-save-badge-color`| Color of the badge once the step is saved | `--primary-color`
+         * `--step-badge-color`| Initial color of the badge | `#9E9E9E`
+         * `--step-badge-content-color`| Color of the number and the icon inside the badge | `#FFFFFF`
+         * 
          * @polymer
+         * @customElement
          * @memberof Caribouflex
          * @mixes Caribouflex.Stepper.StepPropertyMixin
-         * @demo demo/index.html
          */
         class CaribouStepElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
 

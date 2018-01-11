@@ -1,0 +1,58 @@
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../../paper-button/paper-button.html">
+
+<dom-module id="click-button">
+    <template>
+        <style>
+            paper-button {
+                background-color: purple;
+                color: #fff;
+                height: 30px;
+            }
+
+             :host {
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -ms-flex-direction: row;
+                -webkit-flex-direction: row;
+                flex-direction: row;
+                padding: 10px;
+            }
+
+            #number {
+                font-size: 24px;
+                margin: 0;
+            }
+        </style>
+        <paper-button on-tap="_add" raised>Click Me</paper-button>
+        <p id="number">{{numberOfClick}}</p>
+    </template>
+    <script>
+        class ClickButtonElement extends Polymer.Element {
+
+            static get is() {
+                return 'click-button';
+            }
+
+            static get properties() {
+                return {
+                    numberOfClick: {
+                        type: Number,
+                        value: 0
+                    }
+                }
+            }
+
+            _add() {
+                if (this.numberOfClick < 3)
+                    this.numberOfClick = this.numberOfClick + 1;
+            }
+
+            isValid() {
+                return this.numberOfClick === 3;
+            }
+        }
+        window.customElements.define(ClickButtonElement.is, ClickButtonElement);
+    </script>
+</dom-module>

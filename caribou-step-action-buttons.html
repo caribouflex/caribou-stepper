@@ -1,19 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-button/paper-button.html">
 
-<!--
-`caribou-step-action-buttons` is an element used to display a panel of action button used to navigate through the stepper.
-These button fires each one an event.
-
-To change the label of each button, refer to the `caribou-step` element.
-
-
-
-Custom property | Description | Default 
-----------------|-------------|---------- 
-`--button-ink-color` | Background color of the ripple | `Based on the button's color` 
-`--button-style` | Mixin applied to the button. Refer `paper-button` element for more details. | `{}` 
--->
 <dom-module id="caribou-step-action-buttons">
     <template>
         <style>
@@ -40,11 +27,19 @@ Custom property | Description | Default
 
     <script>
         /**
-         * `caribou-step-action-buttons`
-         * 
+         * `caribou-step-action-buttons` is an element used to display a panel of action button used to navigate through the stepper.
+         * These button fires each one an event.
+         *     
+         * To change the label of each button, refer to the `caribou-step` element.
+         *     
+         * Custom property | Description | Default 
+         * ----------------|-------------|---------- 
+         * `--button-ink-color` | Background color of the ripple | `Based on the button's color` 
+         * `--button-style` | Mixin applied to the button. Refer `paper-button` element for more details. | `{}` 
          *
-         * @customElement
          * @polymer
+         * @customElement
+         *
          * @demo demo/index.html
          */
         class CaribouStepActionButtonsElement extends Polymer.Element {

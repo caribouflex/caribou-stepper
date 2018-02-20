@@ -4,12 +4,13 @@
 <dom-module id="caribou-stepper">
     <template>
         <style>
-             :host {
+            :host {
                 display: block;
                 --primary-color: #2196F3;
+                position: relative;
             }
 
-             :host([horizontal]) {
+            :host([horizontal]) {
                 @apply --layout-horizontal;
             }
         </style>

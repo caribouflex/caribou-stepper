@@ -42,6 +42,7 @@
          * @memberof Caribouflex
          * @mixes Caribouflex.Stepper.StepperPropertyMixin
          * @demo demo/index.html
+         * @element caribou-stepper
          */
         class CaribouStepperElement extends Caribouflex.Stepper.StepperPropertyMixin(Polymer.Element) {
 
@@ -195,6 +196,16 @@
             }
 
             /**
+             * This function is used to close all the steps and save the target step
+             * that is the initiative of the close.
+             * @param {Object} stepInitiator The step inititor and targeted.
+             */
+            __closeAllStep(stepInitiator){
+                this.__changeStepTarget = stepInitiator;
+                this.closeAllStep();
+            }
+            
+             /**
              * This function is used to close all the steps.
              */
             closeAllStep() {

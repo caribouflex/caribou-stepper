@@ -13,7 +13,6 @@
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../caribou-stepper.html">
   <link rel="import" href="../caribou-step.html">
-  <link rel="import" href="../caribou-step-horizontal.html">
   <link rel="import" href="../../paper-input/paper-input.html">
   <link rel="import" href="../../paper-checkbox/paper-checkbox.html">
   <link rel="import" href="../../paper-button/paper-button.html">
@@ -31,25 +30,25 @@
     <demo-snippet>
       <template>
         <caribou-stepper id="stepper" horizontal>
-          <caribou-step-horizontal id="stepper1step1" label="Personal">
+          <caribou-step id="stepper1step1" label="Personal">
             <paper-input label="First Name"></paper-input>
             <paper-input label="Last Name"></paper-input>
-          </caribou-step-horizontal>
-          <caribou-step-horizontal id="stepper1step2" label="Hobbies" editable>
+          </caribou-step>
+          <caribou-step id="stepper1step2" label="Hobbies" editable>
             <div style="padding:5px;">
               <paper-checkbox>Soccer</paper-checkbox>
               <paper-checkbox>Backetball</paper-checkbox>
               <paper-checkbox>Tennis</paper-checkbox>
               <paper-checkbox>Fishing</paper-checkbox>
             </div>
-          </caribou-step-horizontal>
-          <caribou-step-horizontal id="stepper1step3" label="Movies">
+          </caribou-step>
+          <caribou-step id="stepper1step3" label="Movies">
             <div style="padding:5px;">
               <paper-checkbox>Star Wars</paper-checkbox>
               <p>Or</p>
               <paper-checkbox>Star Trek</paper-checkbox>
             </div>
-          </caribou-step-horizontal>
+          </caribou-step>
         </caribou-stepper>
         <button onclick="reset();">reset</button>
         <script>

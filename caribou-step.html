@@ -10,20 +10,43 @@
 <dom-module id="caribou-step">
     <template>
         <style>
-             :host {
-                /* display: block; */
-            }
             /* General */
+
+            :host {
+                height: inherit;
+            }
+
+            :host([stepper-horizontal]) {
+                width: auto;
+                @apply --layout-flex;
+            }
+
+            :host([stepper-horizontal][active]) {
+                height: 400px;
+                width: auto;
+                @apply --layout-flex;
+            }
 
             div.layout {
                 border-left: 1px solid var(--step-connector-line-color, #BDBDBD);
                 margin-left: 24px;
                 padding: 10px 28px;
             }
-            /* paper-button {
+
+            :host([stepper-horizontal]) div.layout {
+                border-left: none;
+                position: absolute;
+                left: 0;
+                right: 0;
+                overflow: hidden;
+                @apply --layout-flex;
+            }
+
+            paper-button {
                 display: flex;
+                margin: 0;
                 justify-content: flex-start;
-            } */
+            }
 
             paper-button {
                 text-align: center;
@@ -32,13 +55,18 @@
                 justify-content: flex-start;
             }
 
-             :host([horizontal]) paper-button:after {
+            :host([stepper-horizontal]) paper-button::after {
                 content: '';
                 border-top: 1px solid var(--step-connector-line-color, #BDBDBD);
                 width: 100%;
+                @apply --layout-flex;
             }
 
-             :host([optional]) span#subtitle {
+            :host(:last-child) paper-button::after {
+                border-top: none;
+            }
+
+            :host([optional]) span#subtitle {
                 display: block;
                 font-size: 0.8em;
                 margin-top: 2px;
@@ -46,18 +74,19 @@
                 text-transform: capitalize;
             }
 
-             :host span#subtitle {
+            :host span#subtitle {
                 display: none;
             }
+
             /* label button */
 
-             :host([save]) div#labelBtn {
+            :host([save]) div#labelBtn {
                 color: var(--step-saved-label-color, #424242);
                 font-weight: inherit;
             }
 
-             :host([save][active]) div#labelBtn,
-             :host([active]) div#labelBtn {
+            :host([save][active]) div#labelBtn,
+            :host([active]) div#labelBtn {
                 color: var(--step-active-label-color, #424242);
                 font-weight: 600;
             }
@@ -68,22 +97,24 @@
                 font-size: 14sp;
                 color: var(--step-label-color, #E0E0E0);
             }
+
             /* icon button */
 
-             :host iron-icon#iconBtn {
+            :host iron-icon#iconBtn {
                 display: none;
                 --iron-icon-fill-color: var(--step-badge-content-color, #FFFFFF);
                 --iron-icon-stroke-color: var(--step-badge-content-color, #FFFFFF);
             }
 
-             :host([save]) iron-icon#iconBtn {
+            :host([save]) iron-icon#iconBtn {
                 display: block;
                 border-color: var(--step-save-badge-color, var(--primary-color));
                 background-color: var(--step-save-badge-color, var(--primary-color));
             }
+
             /* Badge */
 
-             :host([save]) span.badgeNumber {
+            :host([save]) span.badgeNumber {
                 display: none;
             }
 
@@ -94,6 +125,7 @@
                 width: var(--step-badge-width, 18px);
                 height: var(--step-badge-height, 18px);
             }
+
             /* Badge and iron-icon */
 
             iron-icon#iconBtn,
@@ -110,6 +142,10 @@
             caribou-step-action-buttons paper-button {
                 @apply --button-style;
             }
+
+            #stepContent {
+                width: 100%;
+            }
         </style>
 
         <paper-button on-tap="_toggle">
@@ -120,7 +156,7 @@
             </div>
         </paper-button>
         <div class="layout">
-            <iron-collapse id="stepContent" opened="{{active}}">
+            <iron-collapse id="stepContent" opened="{{active}}" horizontal>
                 <slot></slot>
                 <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" finish-label="[[finishLabel]]" update-label="[[updateLabel]]"
                     skip-label="[[skipLabel]]" skip-button="[[skipButton]]" back-label="[[backLabel]]" back-button="[[backButton]]"></caribou-step-action-buttons>
@@ -177,6 +213,7 @@
          * @customElement
          * @memberof Caribouflex
          * @mixes Caribouflex.Stepper.StepPropertyMixin
+         * @element caribou-step
          */
         class CaribouStepElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
 
@@ -217,6 +254,16 @@
                     _badgeNumber: {
                         type: Number,
                         readOnly: true
+                    },
+
+                    /**
+                     * True if the paper-stepper is set horizontal, false otherwise
+                     */
+                    stepperHorizontal: {
+                        type: Boolean,
+                        value: false,
+                        readOnly: true,
+                        reflectToAttribute: true
                     }
                 };
             }
@@ -233,11 +280,16 @@
 
                 this._set_badgeNumber(Caribouflex.Stepper.Context.numberOfStep);
 
+                this._setStepperHorizontal(this.parentElement.horizontal);
+
                 //if there is no step behind, we clear the number of step context temp we used.
                 if (this.nextElementSibling === null)
                     Caribouflex.Stepper.Context.numberOfStep = undefined;
-
             }
+
+            // static get observers() {
+            //     return ["_setFloatForTransition(active)"];
+            // }
 
             /**
              * In this ready function, we will take care of oppening the step if it's the first one 
@@ -246,6 +298,7 @@
              */
             ready() {
                 super.ready();
+
                 var openFirst = this._getOpenFirstStepOnStartup();
 
                 //we open the first step according the value set on the stepper element.
@@ -258,6 +311,27 @@
                 this._register();
             }
 
+            _setFloatForTransition(active) {
+                if (this.parentElement.__changeStepTarget !== undefined) {
+                    console.log(this.parentElement.__changeStepTarget._badgeNumber);
+
+                    if (this.parentElement.__changeStepTarget._badgeNumber < this._badgeNumber && !active)
+                        this.$.stepContent.style.float = "right";
+
+                    else if (this.parentElement.__changeStepTarget._badgeNumber < this._badgeNumber)
+                        this.$.stepContent.style.float = "";
+
+                    else if (this.parentElement.__changeStepTarget._badgeNumber > this._badgeNumber && !active)
+                        this.$.stepContent.style.float = "";
+
+                    else if (this.parentElement.__changeStepTarget._badgeNumber >= this._badgeNumber && !active)
+                        this.$.stepContent.style.float = "right";
+//egal et active true => left
+                    else if (this.parentElement.__changeStepTarget._badgeNumber >= this._badgeNumber)
+                        this.$.stepContent.style.float = "";
+                }
+            }
+
             /**
              * This is a callback function called whent the step title is clicked.
              * This will close all the open steps before opening the one selected, if the criteria are respected.
@@ -268,7 +342,7 @@
                 if (!this.parentElement.finish && (!this.parentElement.linear && (!this.save || this.editable)) ||
                     (this.parentElement.linear &&
                         this.editable)) {
-                    this.parentElement.closeAllStep();
+                    this.parentElement.__closeAllStep(this);
                     this.toggleStep();
                     if (this.save && this.editable)
                         this.$.stepButtons.setUpdate(true);
@@ -282,6 +356,8 @@
              *                         If it is, we will call the function setFinish() to set the good button.
              */
             toggleStep(isLast) {
+                this._setFloatForTransition(!this.active);
+
                 if (isLast !== undefined && isLast)
                     this.$.stepButtons.setFinish(true);
 
@@ -333,7 +409,6 @@
                     composed: true
                 }));
             }
-
         }
 
         window.customElements.define(CaribouStepElement.is, CaribouStepElement);

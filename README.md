@@ -9,10 +9,14 @@ Anything can be inserted into each step.
 
 All the elements can be customized refer to the styling section.
 
+### NEW
+
+- Horizontal stepper is coming 
+- Step validation
+
 ### Incoming (TODO)
 - Bug Fixes
 - IE11 support
-- Horizontal stepper
 - Mobile stepper
 
 

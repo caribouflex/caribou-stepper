@@ -6,13 +6,13 @@
       "description": "",
       "summary": "",
       "sourceRange": {
-        "file": "caribou-step.html",
+        "file": "caribou-step-horizontal.html",
         "start": {
-          "line": 343,
+          "line": 387,
           "column": 8
         },
         "end": {
-          "line": 343,
+          "line": 387,
           "column": 54
         }
       },
@@ -45,6 +45,28 @@
               "inheritedFrom": "Caribouflex.Stepper.StepperPropertyMixin"
             },
             {
+              "name": "horizontal",
+              "type": "boolean",
+              "description": "This is used to know if the stepper is render vertically or horizontally.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-stepper-property-mixin.html",
+                "start": {
+                  "line": 25,
+                  "column": 20
+                },
+                "end": {
+                  "line": 28,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Caribouflex.Stepper.StepperPropertyMixin"
+            },
+            {
               "name": "mobile",
               "type": "boolean",
               "description": "This property is used to indicate when the view is displayed for mobile.",
@@ -52,11 +74,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 34,
+                  "line": 33,
                   "column": 20
                 },
                 "end": {
-                  "line": 37,
+                  "line": 36,
                   "column": 21
                 }
               },
@@ -74,11 +96,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 42,
+                  "line": 41,
                   "column": 20
                 },
                 "end": {
-                  "line": 45,
+                  "line": 44,
                   "column": 21
                 }
               },
@@ -96,11 +118,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 53,
+                  "line": 52,
                   "column": 20
                 },
                 "end": {
-                  "line": 55,
+                  "line": 54,
                   "column": 21
                 }
               },
@@ -117,11 +139,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 60,
+                  "line": 59,
                   "column": 20
                 },
                 "end": {
-                  "line": 62,
+                  "line": 61,
                   "column": 21
                 }
               },
@@ -138,11 +160,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 68,
+                  "line": 67,
                   "column": 20
                 },
                 "end": {
-                  "line": 70,
+                  "line": 69,
                   "column": 21
                 }
               },
@@ -159,11 +181,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 76,
+                  "line": 75,
                   "column": 20
                 },
                 "end": {
-                  "line": 80,
+                  "line": 79,
                   "column": 21
                 }
               },
@@ -176,17 +198,59 @@
               "inheritedFrom": "Caribouflex.Stepper.StepperPropertyMixin"
             },
             {
+              "name": "__toStep",
+              "type": "Object",
+              "description": "Used for the transition in horizontal mode.\nThis is the step where we are going. (step targeting)",
+              "privacy": "private",
+              "sourceRange": {
+                "file": "caribou-stepper-stepper-property-mixin.html",
+                "start": {
+                  "line": 86,
+                  "column": 20
+                },
+                "end": {
+                  "line": 88,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Caribouflex.Stepper.StepperPropertyMixin"
+            },
+            {
+              "name": "__fromStep",
+              "type": "Object",
+              "description": "Used for the transition in horizontal mode.\nThis is the step we are coming from.",
+              "privacy": "private",
+              "sourceRange": {
+                "file": "caribou-stepper-stepper-property-mixin.html",
+                "start": {
+                  "line": 95,
+                  "column": 20
+                },
+                "end": {
+                  "line": 97,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "inheritedFrom": "Caribouflex.Stepper.StepperPropertyMixin"
+            },
+            {
               "name": "_steps",
               "type": "Array",
               "description": "Contain all the steps registered.",
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 62,
+                  "line": 64,
                   "column": 20
                 },
                 "end": {
-                  "line": 67,
+                  "line": 69,
                   "column": 21
                 }
               },
@@ -202,11 +266,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 74,
+                  "line": 76,
                   "column": 20
                 },
                 "end": {
-                  "line": 78,
+                  "line": 80,
                   "column": 21
                 }
               },
@@ -225,11 +289,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 93,
+                  "line": 95,
                   "column": 12
                 },
                 "end": {
-                  "line": 101,
+                  "line": 103,
                   "column": 13
                 }
               },
@@ -246,11 +310,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 108,
+                  "line": 110,
                   "column": 12
                 },
                 "end": {
-                  "line": 110,
+                  "line": 112,
                   "column": 13
                 }
               },
@@ -267,11 +331,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 117,
+                  "line": 119,
                   "column": 12
                 },
                 "end": {
-                  "line": 119,
+                  "line": 121,
                   "column": 13
                 }
               },
@@ -288,11 +352,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 126,
+                  "line": 128,
                   "column": 12
                 },
                 "end": {
-                  "line": 128,
+                  "line": 130,
                   "column": 13
                 }
               },
@@ -309,11 +373,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 135,
+                  "line": 137,
                   "column": 12
                 },
                 "end": {
-                  "line": 148,
+                  "line": 150,
                   "column": 13
                 }
               },
@@ -330,11 +394,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 155,
+                  "line": 157,
                   "column": 12
                 },
                 "end": {
-                  "line": 165,
+                  "line": 173,
                   "column": 13
                 }
               },
@@ -347,11 +411,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 172,
+                  "line": 180,
                   "column": 12
                 },
                 "end": {
-                  "line": 177,
+                  "line": 185,
                   "column": 13
                 }
               },
@@ -364,11 +428,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 184,
+                  "line": 192,
                   "column": 12
                 },
                 "end": {
-                  "line": 193,
+                  "line": 201,
                   "column": 13
                 }
               },
@@ -376,16 +440,39 @@
               "params": []
             },
             {
+              "name": "__closeAllStep",
+              "description": "This function is used to close all the steps and save the target step\nthat is the initiative of the close.",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 208,
+                  "column": 12
+                },
+                "end": {
+                  "line": 212,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "stepInitiator",
+                  "type": "Object",
+                  "description": "The step inititor and targeted."
+                }
+              ]
+            },
+            {
               "name": "closeAllStep",
               "description": "This function is used to close all the steps.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 198,
+                  "line": 217,
                   "column": 12
                 },
                 "end": {
-                  "line": 205,
+                  "line": 224,
                   "column": 13
                 }
               },
@@ -395,27 +482,6 @@
             {
               "name": "_getUnsavedStep",
               "description": "This function is used to check if all steps are saved, \nif not, it will open the first step in linear order that is not saved.",
-              "privacy": "private",
-              "sourceRange": {
-                "start": {
-                  "line": 214,
-                  "column": 12
-                },
-                "end": {
-                  "line": 224,
-                  "column": 13
-                }
-              },
-              "metadata": {},
-              "params": [],
-              "return": {
-                "type": "Object",
-                "desc": "The stepper to open if there is or null."
-              }
-            },
-            {
-              "name": "_getPreviousStep",
-              "description": "This function is used to check all the previous step the the active one.\nIf there is a step that is not saved or editabled, we returned it.",
               "privacy": "private",
               "sourceRange": {
                 "start": {
@@ -435,16 +501,37 @@
               }
             },
             {
+              "name": "_getPreviousStep",
+              "description": "This function is used to check all the previous step the the active one.\nIf there is a step that is not saved or editabled, we returned it.",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 252,
+                  "column": 12
+                },
+                "end": {
+                  "line": 262,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "return": {
+                "type": "Object",
+                "desc": "The stepper to open if there is or null."
+              }
+            },
+            {
               "name": "getStepById",
               "description": "This function is used to return the step element \nsituated at the specific ID.",
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 251,
+                  "line": 270,
                   "column": 12
                 },
                 "end": {
-                  "line": 253,
+                  "line": 272,
                   "column": 13
                 }
               },
@@ -467,11 +554,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 259,
+                  "line": 278,
                   "column": 12
                 },
                 "end": {
-                  "line": 268,
+                  "line": 287,
                   "column": 13
                 }
               },
@@ -490,11 +577,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 273,
+                  "line": 292,
                   "column": 12
                 },
                 "end": {
-                  "line": 275,
+                  "line": 294,
                   "column": 13
                 }
               },
@@ -507,11 +594,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 281,
+                  "line": 300,
                   "column": 12
                 },
                 "end": {
-                  "line": 283,
+                  "line": 302,
                   "column": 13
                 }
               },
@@ -530,11 +617,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 289,
+                  "line": 308,
                   "column": 12
                 },
                 "end": {
-                  "line": 291,
+                  "line": 310,
                   "column": 13
                 }
               },
@@ -553,11 +640,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 297,
+                  "line": 316,
                   "column": 12
                 },
                 "end": {
-                  "line": 307,
+                  "line": 326,
                   "column": 13
                 }
               },
@@ -576,11 +663,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 313,
+                  "line": 332,
                   "column": 12
                 },
                 "end": {
-                  "line": 328,
+                  "line": 347,
                   "column": 13
                 }
               },
@@ -599,11 +686,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 334,
+                  "line": 353,
                   "column": 12
                 },
                 "end": {
-                  "line": 344,
+                  "line": 363,
                   "column": 13
                 }
               },
@@ -621,11 +708,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 44,
+              "line": 46,
               "column": 8
             },
             "end": {
-              "line": 345,
+              "line": 364,
               "column": 9
             }
           },
@@ -652,16 +739,34 @@
               "inheritedFrom": "Caribouflex.Stepper.StepperPropertyMixin"
             },
             {
+              "name": "horizontal",
+              "description": "This is used to know if the stepper is render vertically or horizontally.",
+              "sourceRange": {
+                "file": "caribou-stepper-stepper-property-mixin.html",
+                "start": {
+                  "line": 25,
+                  "column": 20
+                },
+                "end": {
+                  "line": 28,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Caribouflex.Stepper.StepperPropertyMixin"
+            },
+            {
               "name": "mobile",
               "description": "This property is used to indicate when the view is displayed for mobile.",
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 34,
+                  "line": 33,
                   "column": 20
                 },
                 "end": {
-                  "line": 37,
+                  "line": 36,
                   "column": 21
                 }
               },
@@ -675,11 +780,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 42,
+                  "line": 41,
                   "column": 20
                 },
                 "end": {
-                  "line": 45,
+                  "line": 44,
                   "column": 21
                 }
               },
@@ -693,11 +798,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 53,
+                  "line": 52,
                   "column": 20
                 },
                 "end": {
-                  "line": 55,
+                  "line": 54,
                   "column": 21
                 }
               },
@@ -711,11 +816,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 60,
+                  "line": 59,
                   "column": 20
                 },
                 "end": {
-                  "line": 62,
+                  "line": 61,
                   "column": 21
                 }
               },
@@ -729,11 +834,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 68,
+                  "line": 67,
                   "column": 20
                 },
                 "end": {
-                  "line": 70,
+                  "line": 69,
                   "column": 21
                 }
               },
@@ -747,11 +852,11 @@
               "sourceRange": {
                 "file": "caribou-stepper-stepper-property-mixin.html",
                 "start": {
-                  "line": 76,
+                  "line": 75,
                   "column": 20
                 },
                 "end": {
-                  "line": 80,
+                  "line": 79,
                   "column": 21
                 }
               },
@@ -764,11 +869,11 @@
               "description": "This property is toggled when the reset function is called.\nWhen we are currently resetting the value, the property is true, false otherwise.",
               "sourceRange": {
                 "start": {
-                  "line": 74,
+                  "line": 76,
                   "column": 20
                 },
                 "end": {
-                  "line": 78,
+                  "line": 80,
                   "column": 21
                 }
               },
@@ -795,11 +900,11 @@
               "range": {
                 "file": "caribou-stepper.html",
                 "start": {
-                  "line": 15,
+                  "line": 16,
                   "column": 8
                 },
                 "end": {
-                  "line": 15,
+                  "line": 16,
                   "column": 21
                 }
               }
@@ -1066,11 +1171,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 208,
+                  "line": 245,
                   "column": 20
                 },
                 "end": {
-                  "line": 210,
+                  "line": 247,
                   "column": 21
                 }
               },
@@ -1085,11 +1190,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 216,
+                  "line": 253,
                   "column": 20
                 },
                 "end": {
-                  "line": 219,
+                  "line": 256,
                   "column": 21
                 }
               },
@@ -1098,6 +1203,28 @@
                   "readOnly": true
                 }
               }
+            },
+            {
+              "name": "stepperHorizontal",
+              "type": "boolean",
+              "description": "True if the paper-stepper is set horizontal, false otherwise",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 261,
+                  "column": 20
+                },
+                "end": {
+                  "line": 266,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              },
+              "defaultValue": "false"
             }
           ],
           "methods": [
@@ -1229,11 +1356,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 246,
+                  "line": 294,
                   "column": 12
                 },
                 "end": {
-                  "line": 258,
+                  "line": 307,
                   "column": 13
                 }
               },
@@ -1241,16 +1368,39 @@
               "params": []
             },
             {
+              "name": "_setFloatForTransition",
+              "description": "Used in the horizontal mode to set the float property.\nThis is used to give the effect of the transition coming from left or right.",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 316,
+                  "column": 12
+                },
+                "end": {
+                  "line": 343,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "active",
+                  "type": "Boolean",
+                  "description": "is the active step or not."
+                }
+              ]
+            },
+            {
               "name": "_toggle",
               "description": "This is a callback function called whent the step title is clicked.\nThis will close all the open steps before opening the one selected, if the criteria are respected.\nMoreover, if we are in a case of a modification, we will display the update button.",
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 266,
+                  "line": 351,
                   "column": 12
                 },
                 "end": {
-                  "line": 275,
+                  "line": 360,
                   "column": 13
                 }
               },
@@ -1263,11 +1413,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 283,
+                  "line": 368,
                   "column": 12
                 },
                 "end": {
-                  "line": 288,
+                  "line": 376,
                   "column": 13
                 }
               },
@@ -1286,11 +1436,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 294,
+                  "line": 382,
                   "column": 12
                 },
                 "end": {
-                  "line": 296,
+                  "line": 384,
                   "column": 13
                 }
               },
@@ -1303,11 +1453,11 @@
               "privacy": "private",
               "sourceRange": {
                 "start": {
-                  "line": 304,
+                  "line": 392,
                   "column": 12
                 },
                 "end": {
-                  "line": 309,
+                  "line": 397,
                   "column": 13
                 }
               },
@@ -1326,11 +1476,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 315,
+                  "line": 403,
                   "column": 12
                 },
                 "end": {
-                  "line": 327,
+                  "line": 415,
                   "column": 13
                 }
               },
@@ -1347,11 +1497,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 329,
+                  "line": 417,
                   "column": 12
                 },
                 "end": {
-                  "line": 334,
+                  "line": 422,
                   "column": 13
                 }
               },
@@ -1364,11 +1514,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 217,
               "column": 8
             },
             "end": {
-              "line": 336,
+              "line": 423,
               "column": 9
             }
           },
@@ -1579,16 +1729,32 @@
               "description": "This is the label of the step",
               "sourceRange": {
                 "start": {
-                  "line": 208,
+                  "line": 245,
                   "column": 20
                 },
                 "end": {
-                  "line": 210,
+                  "line": 247,
                   "column": 21
                 }
               },
               "metadata": {},
               "type": "string"
+            },
+            {
+              "name": "stepper-horizontal",
+              "description": "True if the paper-stepper is set horizontal, false otherwise",
+              "sourceRange": {
+                "start": {
+                  "line": 261,
+                  "column": 20
+                },
+                "end": {
+                  "line": 266,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean"
             }
           ],
           "events": [
@@ -1616,17 +1782,876 @@
               "range": {
                 "file": "caribou-step.html",
                 "start": {
-                  "line": 123,
+                  "line": 159,
                   "column": 16
                 },
                 "end": {
-                  "line": 123,
+                  "line": 159,
                   "column": 29
                 }
               }
             }
           ],
           "tagname": "caribou-step",
+          "mixins": [
+            "Caribouflex.Stepper.StepPropertyMixin"
+          ]
+        },
+        {
+          "description": "`<caribou-step>` is an element that need to be surrounded by a `<caribou-stepper>` element.\n\nThis element correspond correspond to one step of the all stepper.\nIt can be Editable and Optional. \nThese both values corresponds to property that can be set on this element.\nAlso you can choose the name of each buttons step.\nIf the stepper is set as Linear, the Skip button will do nothing except if the property Optional is set.\n        \nYou can add whatever you want inside the `<caribou-step>` element tag.\n\nEach steps will be numbered following the order added into the stepper.\n\nExample:\n```html\n<caribou-step label=\"Information\" skip-button optional>\n\t<paper-input always-float-label label=\"Surname\"></paper-input>\n\t<paper-input label=\"username\">\n\t\t<iron-icon icon=\"mail\" slot=\"prefix\"></iron-icon>\n\t\t<div slot=\"suffix\">@email.com</div>\n\t</paper-input>\n</caribou-step>\n```\n\n### Styling The following custom properties and mixins are available for styling: \n\nFor the `--step-badge-width` and the `--step-badge-height`, there is a border (6px) added to the badge that could not be changed.\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--step-connector-line-color` | Color of the line that connect the steps | `#BDBDBD` \n`--step-saved-label-color` | Color of the label once it's saved | `#424242`\n`--step-active-label-color`| Color of the label when the step is active | `#424242`\n`--step-label-color`| Initial color of the label | `#E0E0E0`\n`--step-badge-height`| The height of the badge (without border) | `18px`\n`--step-badge-width`| The width of the badge (without border) | `18px`\n`--step-save-badge-color`| Color of the badge once the step is saved | `--primary-color`\n`--step-badge-color`| Initial color of the badge | `#9E9E9E`\n`--step-badge-content-color`| Color of the number and the icon inside the badge | `#FFFFFF`",
+          "summary": "",
+          "path": "caribou-step-horizontal.html",
+          "properties": [
+            {
+              "name": "save",
+              "type": "boolean",
+              "description": "Property used to indicate if the step is saved.\nTrue if it's saved, false otherwise.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 17,
+                  "column": 20
+                },
+                "end": {
+                  "line": 20,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "editable",
+              "type": "boolean",
+              "description": "Property used to indicate if the step is editable.\nTrue if it's editable, false otherwise.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 26,
+                  "column": 20
+                },
+                "end": {
+                  "line": 29,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "optional",
+              "type": "boolean",
+              "description": "Property used to indicate if the step is optional.\nTrue if it's optional, false otherwise.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 35,
+                  "column": 20
+                },
+                "end": {
+                  "line": 38,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "active",
+              "type": "boolean",
+              "description": "Property used to indicate if the step is active.\nIf the step is active that means it will be open, and it's the current step we are focused on.\nTrue if it's active, false otherwise.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 45,
+                  "column": 20
+                },
+                "end": {
+                  "line": 50,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "observer": "\"changeActiveStep\""
+                }
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "continueLabel",
+              "type": "string",
+              "description": "The continue button text value\n'Continue' by default",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 56,
+                  "column": 20
+                },
+                "end": {
+                  "line": 59,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"Continue\"",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "finishLabel",
+              "type": "string",
+              "description": "The finish button text value\n'Finish' by default",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 65,
+                  "column": 20
+                },
+                "end": {
+                  "line": 68,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"Finish\"",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "updateLabel",
+              "type": "string",
+              "description": "The update button text value\n'Update' by default",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 74,
+                  "column": 20
+                },
+                "end": {
+                  "line": 77,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"Update\"",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "skipLabel",
+              "type": "string",
+              "description": "The skip button text value\n'Skip' by default",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 83,
+                  "column": 20
+                },
+                "end": {
+                  "line": 86,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"Skip\"",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "skipButton",
+              "type": "boolean",
+              "description": "True to display the skip button, false otherwise.\nIf the step is linear, the skip button will do nothing, except if the property Optional is true.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 92,
+                  "column": 20
+                },
+                "end": {
+                  "line": 96,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "backLabel",
+              "type": "string",
+              "description": "The back button text value\n'Back' by default",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 102,
+                  "column": 20
+                },
+                "end": {
+                  "line": 105,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "\"Back\"",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "backButton",
+              "type": "boolean",
+              "description": "True to display the back button, false otherwise.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 110,
+                  "column": 20
+                },
+                "end": {
+                  "line": 113,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              },
+              "defaultValue": "false",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "description": "This is the label of the step",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 240,
+                  "column": 20
+                },
+                "end": {
+                  "line": 242,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {}
+              }
+            },
+            {
+              "name": "_badgeNumber",
+              "type": "number",
+              "description": "This is the number of the step.\nThis property is used on the badge.",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 248,
+                  "column": 20
+                },
+                "end": {
+                  "line": 251,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              }
+            },
+            {
+              "name": "stepperHorizontal",
+              "type": "boolean",
+              "description": "True if the paper-stepper is set horizontal, false otherwise",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 256,
+                  "column": 20
+                },
+                "end": {
+                  "line": 261,
+                  "column": 21
+                }
+              },
+              "metadata": {
+                "polymer": {
+                  "readOnly": true
+                }
+              },
+              "defaultValue": "false"
+            }
+          ],
+          "methods": [
+            {
+              "name": "saveStep",
+              "description": "This function is used to set the property save to true.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 120,
+                  "column": 12
+                },
+                "end": {
+                  "line": 122,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "isActive",
+              "description": "Getter used to know if the step is active or not.",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 128,
+                  "column": 12
+                },
+                "end": {
+                  "line": 130,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "return": {
+                "type": "Boolean",
+                "desc": "True if it is, false otherwise."
+              },
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "_register",
+              "description": "This function is used to register an element to the parent.",
+              "privacy": "private",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 136,
+                  "column": 12
+                },
+                "end": {
+                  "line": 138,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "validate",
+              "description": "",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 140,
+                  "column": 12
+                },
+                "end": {
+                  "line": 142,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "_getOpenFirstStepOnStartup",
+              "description": "This function is used to know if the property 'openFirstStepOnStartup' is set to true.",
+              "privacy": "private",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 148,
+                  "column": 12
+                },
+                "end": {
+                  "line": 150,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [],
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "changeActiveStep",
+              "description": "",
+              "privacy": "public",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 152,
+                  "column": 12
+                },
+                "end": {
+                  "line": 155,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "active"
+                }
+              ],
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "ready",
+              "description": "In this ready function, we will take care of oppening the step if it's the first one \nAnd if the parameter is set for.\nThen we will call the register function, which is used to register a step into the stepper.",
+              "privacy": "protected",
+              "sourceRange": {
+                "start": {
+                  "line": 290,
+                  "column": 12
+                },
+                "end": {
+                  "line": 302,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": []
+            },
+            {
+              "name": "_toggle",
+              "description": "This is a callback function called whent the step title is clicked.\nThis will close all the open steps before opening the one selected, if the criteria are respected.\nMoreover, if we are in a case of a modification, we will display the update button.",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 310,
+                  "column": 12
+                },
+                "end": {
+                  "line": 319,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": []
+            },
+            {
+              "name": "toggleStep",
+              "description": "This function is used to toggle the step. That means, it will open the current step.\nWhen a step is open the 'active' property is true.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 327,
+                  "column": 12
+                },
+                "end": {
+                  "line": 332,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "isLast",
+                  "type": "Boolean",
+                  "description": "This property is used to indicate if this step is the last step of the stepper.\n                        If it is, we will call the function setFinish() to set the good button."
+                }
+              ]
+            },
+            {
+              "name": "setFinishActionButtonsState",
+              "description": "This function is used to set the finish action button state to true.\nFor this step the button will display the finish button.",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 338,
+                  "column": 12
+                },
+                "end": {
+                  "line": 340,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": []
+            },
+            {
+              "name": "_getIcon",
+              "description": "This function is used to get the good icon to display into the badge,\naccordign to the 'editable' property.",
+              "privacy": "private",
+              "sourceRange": {
+                "start": {
+                  "line": 348,
+                  "column": 12
+                },
+                "end": {
+                  "line": 353,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "editable",
+                  "type": "Boolean",
+                  "description": "true if it's an editable step, false otherwise."
+                }
+              ]
+            },
+            {
+              "name": "reset",
+              "description": "This function is used to reinitialize all the parameter of this element \nand the action buttons",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 359,
+                  "column": 12
+                },
+                "end": {
+                  "line": 371,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": [
+                {
+                  "name": "openFirstStep"
+                }
+              ]
+            },
+            {
+              "name": "fireInvalidStep",
+              "description": "",
+              "privacy": "public",
+              "sourceRange": {
+                "start": {
+                  "line": 373,
+                  "column": 12
+                },
+                "end": {
+                  "line": 378,
+                  "column": 13
+                }
+              },
+              "metadata": {},
+              "params": []
+            }
+          ],
+          "staticMethods": [],
+          "demos": [],
+          "metadata": {},
+          "sourceRange": {
+            "start": {
+              "line": 212,
+              "column": 8
+            },
+            "end": {
+              "line": 380,
+              "column": 9
+            }
+          },
+          "privacy": "public",
+          "superclass": "HTMLElement",
+          "name": "Caribouflex.CaribouStepHorizontalElement",
+          "attributes": [
+            {
+              "name": "save",
+              "description": "Property used to indicate if the step is saved.\nTrue if it's saved, false otherwise.",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 17,
+                  "column": 20
+                },
+                "end": {
+                  "line": 20,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "editable",
+              "description": "Property used to indicate if the step is editable.\nTrue if it's editable, false otherwise.",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 26,
+                  "column": 20
+                },
+                "end": {
+                  "line": 29,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "optional",
+              "description": "Property used to indicate if the step is optional.\nTrue if it's optional, false otherwise.",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 35,
+                  "column": 20
+                },
+                "end": {
+                  "line": 38,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "active",
+              "description": "Property used to indicate if the step is active.\nIf the step is active that means it will be open, and it's the current step we are focused on.\nTrue if it's active, false otherwise.",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 45,
+                  "column": 20
+                },
+                "end": {
+                  "line": 50,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "continue-label",
+              "description": "The continue button text value\n'Continue' by default",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 56,
+                  "column": 20
+                },
+                "end": {
+                  "line": 59,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "string",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "finish-label",
+              "description": "The finish button text value\n'Finish' by default",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 65,
+                  "column": 20
+                },
+                "end": {
+                  "line": 68,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "string",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "update-label",
+              "description": "The update button text value\n'Update' by default",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 74,
+                  "column": 20
+                },
+                "end": {
+                  "line": 77,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "string",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "skip-label",
+              "description": "The skip button text value\n'Skip' by default",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 83,
+                  "column": 20
+                },
+                "end": {
+                  "line": 86,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "string",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "skip-button",
+              "description": "True to display the skip button, false otherwise.\nIf the step is linear, the skip button will do nothing, except if the property Optional is true.",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 92,
+                  "column": 20
+                },
+                "end": {
+                  "line": 96,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "back-label",
+              "description": "The back button text value\n'Back' by default",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 102,
+                  "column": 20
+                },
+                "end": {
+                  "line": 105,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "string",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "back-button",
+              "description": "True to display the back button, false otherwise.",
+              "sourceRange": {
+                "file": "caribou-stepper-step-property-mixin.html",
+                "start": {
+                  "line": 110,
+                  "column": 20
+                },
+                "end": {
+                  "line": 113,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean",
+              "inheritedFrom": "Caribouflex.Stepper.StepPropertyMixin"
+            },
+            {
+              "name": "label",
+              "description": "This is the label of the step",
+              "sourceRange": {
+                "start": {
+                  "line": 240,
+                  "column": 20
+                },
+                "end": {
+                  "line": 242,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "string"
+            },
+            {
+              "name": "stepper-horizontal",
+              "description": "True if the paper-stepper is set horizontal, false otherwise",
+              "sourceRange": {
+                "start": {
+                  "line": 256,
+                  "column": 20
+                },
+                "end": {
+                  "line": 261,
+                  "column": 21
+                }
+              },
+              "metadata": {},
+              "type": "boolean"
+            }
+          ],
+          "events": [
+            {
+              "type": "CustomEvent",
+              "name": "last-step-closed",
+              "description": "last-step-closed",
+              "metadata": {}
+            },
+            {
+              "type": "CustomEvent",
+              "name": "step-invalid",
+              "description": "step-invalid",
+              "metadata": {}
+            }
+          ],
+          "styling": {
+            "cssVariables": [],
+            "selectors": []
+          },
+          "slots": [
+            {
+              "description": "",
+              "name": "",
+              "range": {
+                "file": "caribou-step-horizontal.html",
+                "start": {
+                  "line": 155,
+                  "column": 16
+                },
+                "end": {
+                  "line": 155,
+                  "column": 29
+                }
+              }
+            }
+          ],
+          "tagname": "caribou-step-horizontal",
           "mixins": [
             "Caribouflex.Stepper.StepPropertyMixin"
           ]
@@ -2406,11 +3431,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 86,
+              "line": 87,
               "column": 20
             },
             "end": {
-              "line": 89,
+              "line": 90,
               "column": 21
             }
           },
@@ -2426,11 +3451,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 91,
+              "line": 92,
               "column": 20
             },
             "end": {
-              "line": 94,
+              "line": 95,
               "column": 21
             }
           },
@@ -2446,11 +3471,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 97,
               "column": 20
             },
             "end": {
-              "line": 100,
+              "line": 101,
               "column": 21
             }
           },
@@ -2468,11 +3493,11 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 102,
+              "line": 103,
               "column": 20
             },
             "end": {
-              "line": 105,
+              "line": 106,
               "column": 21
             }
           },
@@ -2488,11 +3513,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 107,
+              "line": 108,
               "column": 20
             },
             "end": {
-              "line": 111,
+              "line": 112,
               "column": 21
             }
           },
@@ -2510,11 +3535,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 116,
+              "line": 117,
               "column": 20
             },
             "end": {
-              "line": 116,
+              "line": 117,
               "column": 37
             }
           },
@@ -2529,11 +3554,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 121,
+              "line": 122,
               "column": 20
             },
             "end": {
-              "line": 121,
+              "line": 122,
               "column": 41
             }
           },
@@ -2548,11 +3573,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 126,
+              "line": 127,
               "column": 20
             },
             "end": {
-              "line": 126,
+              "line": 127,
               "column": 37
             }
           },
@@ -2567,11 +3592,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 131,
+              "line": 132,
               "column": 20
             },
             "end": {
-              "line": 131,
+              "line": 132,
               "column": 39
             }
           },
@@ -2586,11 +3611,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 136,
+              "line": 137,
               "column": 20
             },
             "end": {
-              "line": 136,
+              "line": 137,
               "column": 39
             }
           },
@@ -4516,11 +5541,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 144,
+              "line": 145,
               "column": 12
             },
             "end": {
-              "line": 146,
+              "line": 147,
               "column": 13
             }
           },
@@ -4539,11 +5564,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 152,
+              "line": 153,
               "column": 12
             },
             "end": {
-              "line": 154,
+              "line": 155,
               "column": 13
             }
           },
@@ -4562,11 +5587,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 160,
+              "line": 161,
               "column": 12
             },
             "end": {
-              "line": 166,
+              "line": 167,
               "column": 13
             }
           },
@@ -4585,11 +5610,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 172,
+              "line": 173,
               "column": 12
             },
             "end": {
-              "line": 177,
+              "line": 178,
               "column": 13
             }
           },
@@ -4608,11 +5633,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 182,
+              "line": 183,
               "column": 12
             },
             "end": {
-              "line": 186,
+              "line": 187,
               "column": 13
             }
           },
@@ -5324,11 +6349,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 42,
+          "line": 43,
           "column": 8
         },
         "end": {
-          "line": 187,
+          "line": 188,
           "column": 9
         }
       },
@@ -5341,11 +6366,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 86,
+              "line": 87,
               "column": 20
             },
             "end": {
-              "line": 89,
+              "line": 90,
               "column": 21
             }
           },
@@ -5357,11 +6382,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 91,
+              "line": 92,
               "column": 20
             },
             "end": {
-              "line": 94,
+              "line": 95,
               "column": 21
             }
           },
@@ -5373,11 +6398,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 97,
               "column": 20
             },
             "end": {
-              "line": 100,
+              "line": 101,
               "column": 21
             }
           },
@@ -5389,11 +6414,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 107,
+              "line": 108,
               "column": 20
             },
             "end": {
-              "line": 111,
+              "line": 112,
               "column": 21
             }
           },
@@ -5405,11 +6430,11 @@
           "description": "The back button text value",
           "sourceRange": {
             "start": {
-              "line": 116,
+              "line": 117,
               "column": 20
             },
             "end": {
-              "line": 116,
+              "line": 117,
               "column": 37
             }
           },
@@ -5421,11 +6446,11 @@
           "description": "The continue button text value",
           "sourceRange": {
             "start": {
-              "line": 121,
+              "line": 122,
               "column": 20
             },
             "end": {
-              "line": 121,
+              "line": 122,
               "column": 41
             }
           },
@@ -5437,11 +6462,11 @@
           "description": "The skip button text value",
           "sourceRange": {
             "start": {
-              "line": 126,
+              "line": 127,
               "column": 20
             },
             "end": {
-              "line": 126,
+              "line": 127,
               "column": 37
             }
           },
@@ -5453,11 +6478,11 @@
           "description": "The skip button text value",
           "sourceRange": {
             "start": {
-              "line": 131,
+              "line": 132,
               "column": 20
             },
             "end": {
-              "line": 131,
+              "line": 132,
               "column": 39
             }
           },
@@ -5469,11 +6494,11 @@
           "description": "The skip button text value",
           "sourceRange": {
             "start": {
-              "line": 136,
+              "line": 137,
               "column": 20
             },
             "end": {
-              "line": 136,
+              "line": 137,
               "column": 39
             }
           },
@@ -9020,17 +10045,37 @@
           "defaultValue": "false"
         },
         {
+          "name": "horizontal",
+          "type": "boolean",
+          "description": "This is used to know if the stepper is render vertically or horizontally.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 25,
+              "column": 20
+            },
+            "end": {
+              "line": 28,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
           "name": "mobile",
           "type": "boolean",
           "description": "This property is used to indicate when the view is displayed for mobile.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 34,
+              "line": 33,
               "column": 20
             },
             "end": {
-              "line": 37,
+              "line": 36,
               "column": 21
             }
           },
@@ -9046,11 +10091,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 42,
+              "line": 41,
               "column": 20
             },
             "end": {
-              "line": 45,
+              "line": 44,
               "column": 21
             }
           },
@@ -9066,11 +10111,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 53,
+              "line": 52,
               "column": 20
             },
             "end": {
-              "line": 55,
+              "line": 54,
               "column": 21
             }
           },
@@ -9085,11 +10130,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 60,
+              "line": 59,
               "column": 20
             },
             "end": {
-              "line": 62,
+              "line": 61,
               "column": 21
             }
           },
@@ -9104,11 +10149,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 68,
+              "line": 67,
               "column": 20
             },
             "end": {
-              "line": 70,
+              "line": 69,
               "column": 21
             }
           },
@@ -9123,11 +10168,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 76,
+              "line": 75,
               "column": 20
             },
             "end": {
-              "line": 80,
+              "line": 79,
               "column": 21
             }
           },
@@ -9137,6 +10182,44 @@
             }
           },
           "defaultValue": "false"
+        },
+        {
+          "name": "__toStep",
+          "type": "Object",
+          "description": "Used for the transition in horizontal mode.\nThis is the step where we are going. (step targeting)",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 86,
+              "column": 20
+            },
+            "end": {
+              "line": 88,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "__fromStep",
+          "type": "Object",
+          "description": "Used for the transition in horizontal mode.\nThis is the step we are coming from.",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 95,
+              "column": 20
+            },
+            "end": {
+              "line": 97,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
         }
       ],
       "methods": [],
@@ -9149,7 +10232,7 @@
           "column": 4
         },
         "end": {
-          "line": 84,
+          "line": 101,
           "column": 5
         }
       },
@@ -9173,15 +10256,31 @@
           "type": "boolean"
         },
         {
+          "name": "horizontal",
+          "description": "This is used to know if the stepper is render vertically or horizontally.",
+          "sourceRange": {
+            "start": {
+              "line": 25,
+              "column": 20
+            },
+            "end": {
+              "line": 28,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
           "name": "mobile",
           "description": "This property is used to indicate when the view is displayed for mobile.",
           "sourceRange": {
             "start": {
-              "line": 34,
+              "line": 33,
               "column": 20
             },
             "end": {
-              "line": 37,
+              "line": 36,
               "column": 21
             }
           },
@@ -9193,11 +10292,11 @@
           "description": "If true, after the stepper is loaded, if will open the first step.",
           "sourceRange": {
             "start": {
-              "line": 42,
+              "line": 41,
               "column": 20
             },
             "end": {
-              "line": 45,
+              "line": 44,
               "column": 21
             }
           },
@@ -9209,11 +10308,11 @@
           "description": "This is the active step element.\nIf the property is equal to : \n - null : That means there is no step active\n - undefined : That means no step has been opened yet.",
           "sourceRange": {
             "start": {
-              "line": 53,
+              "line": 52,
               "column": 20
             },
             "end": {
-              "line": 55,
+              "line": 54,
               "column": 21
             }
           },
@@ -9225,11 +10324,11 @@
           "description": "This is the step following the current active step.",
           "sourceRange": {
             "start": {
-              "line": 60,
+              "line": 59,
               "column": 20
             },
             "end": {
-              "line": 62,
+              "line": 61,
               "column": 21
             }
           },
@@ -9241,11 +10340,11 @@
           "description": "This is the step that can be open before the active step.\nIt can be an editabled step or a step unsaved.",
           "sourceRange": {
             "start": {
-              "line": 68,
+              "line": 67,
               "column": 20
             },
             "end": {
-              "line": 70,
+              "line": 69,
               "column": 21
             }
           },
@@ -9257,11 +10356,11 @@
           "description": "Property used to indicate if the stepper is finished or not.",
           "sourceRange": {
             "start": {
-              "line": 76,
+              "line": 75,
               "column": 20
             },
             "end": {
-              "line": 80,
+              "line": 79,
               "column": 21
             }
           },

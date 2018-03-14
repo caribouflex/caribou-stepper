@@ -158,6 +158,12 @@
             openNextStep() {
                 if (this.activeStep.validate()) {
                     this.activeStep.saveStep();
+
+                    //set the value to and from the the transition effect.
+                    this.__fromStep = this.activeStep;
+                    this.__toStep = this.nextStep;
+
+                    //toggle the step
                     this.activeStep.toggleStep();
                     this.removeActiveStep();
                     if (this.nextStep !== null)
@@ -201,7 +207,8 @@
              * @param {Object} stepInitiator The step inititor and targeted.
              */
             __closeAllStep(stepInitiator) {
-                this.__changeStepTarget = stepInitiator;
+                //we set the to step used for the transition from the step button.
+                this.__toStep = stepInitiator;
                 this.closeAllStep();
             }
 

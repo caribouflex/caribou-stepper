@@ -310,24 +310,35 @@
             /**
              * Used in the horizontal mode to set the float property.
              * This is used to give the effect of the transition coming from left or right.
+             * 
              * @param {Boolean} active is the active step or not.
              * @private
              */
             _setFloatForTransition(active) {
-                if (this.parentElement.__changeStepTarget !== undefined) {
-                    console.log(this.parentElement.__changeStepTarget._badgeNumber);
 
-                    if (this.parentElement.__changeStepTarget._badgeNumber < this._badgeNumber)
+                var toStep = this.parentElement.__toStep;
+                var fromStep = this.parentElement.__fromStep;
+                var activeStep = this.parentElement.activeStep;
+
+                if (toStep !== undefined && toStep !== null) {
+
+                    if (toStep._badgeNumber < this._badgeNumber)
                         this.$.stepContent.style.float = "right";
-                    else if (this.parentElement.__changeStepTarget._badgeNumber > this._badgeNumber)
+                    else if (toStep._badgeNumber > this._badgeNumber)
                         this.$.stepContent.style.float = "";
-                    else if (this.parentElement.activeStep === undefined)
+                    else if (activeStep === undefined)
                         this.$.stepContent.style.float = "";
-                    else if (this.parentElement.__changeStepTarget._badgeNumber === this._badgeNumber && this.parentElement.activeStep._badgeNumber < this._badgeNumber)
+                    else if(toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber < fromStep._badgeNumber)
+                        this.$.stepContent.style.float = "";
+                    else if (toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber > fromStep._badgeNumber)
                         this.$.stepContent.style.float = "right";
-                    else if (this.parentElement.__changeStepTarget._badgeNumber === this._badgeNumber && this.parentElement.activeStep._badgeNumber < this._badgeNumber)
+                    else if (toStep._badgeNumber === this._badgeNumber && activeStep === null)
+                        this.$.stepContent.style.float = "right";
+                    else if (toStep._badgeNumber === this._badgeNumber && activeStep._badgeNumber < this._badgeNumber)
+                        this.$.stepContent.style.float = "right";
+                    else if (toStep._badgeNumber === this._badgeNumber && activeStep._badgeNumber > this._badgeNumber)
                         this.$.stepContent.style.float = "";
-                    else if (this.parentElement.__changeStepTarget._badgeNumber === this._badgeNumber && !active)
+                    else if (toStep._badgeNumber === this._badgeNumber && !active)
                         this.$.stepContent.style.float = "";
                 }
             }
@@ -356,6 +367,7 @@
              *                         If it is, we will call the function setFinish() to set the good button.
              */
             toggleStep(isLast) {
+
                 this._setFloatForTransition(!this.active);
 
                 if (isLast !== undefined && isLast)

@@ -13,10 +13,10 @@ All the elements can be customized refer to the styling section.
 
 - Horizontal stepper is coming 
 - Step validation
+- IE11 support
 
 ### Incoming (TODO)
 - Bug Fixes
-- IE11 support
 - Mobile stepper
 
 

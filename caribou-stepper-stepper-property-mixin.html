@@ -80,11 +80,20 @@
                     },
 
                     /**
-                     * Initialized when the stepper selected change from the step label button.
-                     * This is the step targeted to be displayed.
+                     * Used for the transition in horizontal mode.
+                     * This is the step where we are going. (step targeting)
                      * @private
                      */
-                    __changeStepTarget: {
+                    __toStep: {
+                        type: Object
+                    },
+
+                    /**
+                     * Used for the transition in horizontal mode.
+                     * This is the step we are coming from.
+                     * @private
+                     */
+                    __fromStep: {
                         type: Object
                     }
                 }

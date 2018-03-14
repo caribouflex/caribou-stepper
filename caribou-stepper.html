@@ -4,12 +4,13 @@
 <dom-module id="caribou-stepper">
     <template>
         <style>
-             :host {
+            :host {
                 display: block;
                 --primary-color: #2196F3;
+                position: relative;
             }
 
-             :host([horizontal]) {
+            :host([horizontal]) {
                 @apply --layout-horizontal;
             }
         </style>
@@ -41,6 +42,7 @@
          * @memberof Caribouflex
          * @mixes Caribouflex.Stepper.StepperPropertyMixin
          * @demo demo/index.html
+         * @element caribou-stepper
          */
         class CaribouStepperElement extends Caribouflex.Stepper.StepperPropertyMixin(Polymer.Element) {
 
@@ -156,6 +158,12 @@
             openNextStep() {
                 if (this.activeStep.validate()) {
                     this.activeStep.saveStep();
+
+                    //set the value to and from the the transition effect.
+                    this.__fromStep = this.activeStep;
+                    this.__toStep = this.nextStep;
+
+                    //toggle the step
                     this.activeStep.toggleStep();
                     this.removeActiveStep();
                     if (this.nextStep !== null)
@@ -191,6 +199,17 @@
                         this.nextStep.toggleStep();
                 } else
                     console.log("can't skip you are in linear mode.");
+            }
+
+            /**
+             * This function is used to close all the steps and save the target step
+             * that is the initiative of the close.
+             * @param {Object} stepInitiator The step inititor and targeted.
+             */
+            __closeAllStep(stepInitiator) {
+                //we set the to step used for the transition from the step button.
+                this.__toStep = stepInitiator;
+                this.closeAllStep();
             }
 
             /**

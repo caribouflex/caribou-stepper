@@ -22,12 +22,11 @@
 
                     /**
                      * This is used to know if the stepper is render vertically or horizontally.
-                     * TODO
                      */
-                    // horizontal: {
-                    //     type: Boolean,
-                    //     value: false
-                    // },
+                    horizontal: {
+                        type: Boolean,
+                        value: false
+                    },
 
                     /**
                      * This property is used to indicate when the view is displayed for mobile.
@@ -78,6 +77,24 @@
                         type: Boolean,
                         value: false,
                         readOnly: true
+                    },
+
+                    /**
+                     * Used for the transition in horizontal mode.
+                     * This is the step where we are going. (step targeting)
+                     * @private
+                     */
+                    __toStep: {
+                        type: Object
+                    },
+
+                    /**
+                     * Used for the transition in horizontal mode.
+                     * This is the step we are coming from.
+                     * @private
+                     */
+                    __fromStep: {
+                        type: Object
                     }
                 }
             }

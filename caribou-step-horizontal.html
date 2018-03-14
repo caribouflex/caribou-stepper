@@ -7,7 +7,7 @@
 <link rel="import" href="caribou-stepper-step-property-mixin.html">
 
 
-<dom-module id="caribou-step">
+<dom-module id="caribou-step-horizontal">
     <template>
         <style>
             /* General */
@@ -142,10 +142,6 @@
             caribou-step-action-buttons paper-button {
                 @apply --button-style;
             }
-
-            #stepContent {
-                width: 100%;
-            }
         </style>
 
         <paper-button on-tap="_toggle">
@@ -156,7 +152,7 @@
             </div>
         </paper-button>
         <div class="layout">
-            <iron-collapse id="stepContent" opened="{{active}}" horizontal$="{{stepperHorizontal}}">
+            <iron-collapse id="stepContent" opened="{{active}}">
                 <slot></slot>
                 <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" finish-label="[[finishLabel]]" update-label="[[updateLabel]]"
                     skip-label="[[skipLabel]]" skip-button="[[skipButton]]" back-label="[[backLabel]]" back-button="[[backButton]]"></caribou-step-action-buttons>
@@ -213,9 +209,8 @@
          * @customElement
          * @memberof Caribouflex
          * @mixes Caribouflex.Stepper.StepPropertyMixin
-         * @element caribou-step
          */
-        class CaribouStepElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
+        class CaribouStepHorizontalElement extends Caribouflex.Stepper.StepPropertyMixin(Polymer.Element) {
 
             /**
              * Fired when the last step has been finished.
@@ -234,7 +229,7 @@
              */
 
             static get is() {
-                return 'caribou-step';
+                return 'caribou-step-horizontal';
             }
 
             static get properties() {
@@ -285,6 +280,7 @@
                 //if there is no step behind, we clear the number of step context temp we used.
                 if (this.nextElementSibling === null)
                     Caribouflex.Stepper.Context.numberOfStep = undefined;
+
             }
 
             /**
@@ -294,7 +290,6 @@
              */
             ready() {
                 super.ready();
-
                 var openFirst = this._getOpenFirstStepOnStartup();
 
                 //we open the first step according the value set on the stepper element.
@@ -308,42 +303,6 @@
             }
 
             /**
-             * Used in the horizontal mode to set the float property.
-             * This is used to give the effect of the transition coming from left or right.
-             * 
-             * @param {Boolean} active is the active step or not.
-             * @private
-             */
-            _setFloatForTransition(active) {
-
-                var toStep = this.parentElement.__toStep;
-                var fromStep = this.parentElement.__fromStep;
-                var activeStep = this.parentElement.activeStep;
-
-                if (toStep !== undefined && toStep !== null) {
-
-                    if (toStep._badgeNumber < this._badgeNumber)
-                        this.$.stepContent.style.float = "right";
-                    else if (toStep._badgeNumber > this._badgeNumber)
-                        this.$.stepContent.style.float = "";
-                    else if (activeStep === undefined)
-                        this.$.stepContent.style.float = "";
-                    else if(toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber < fromStep._badgeNumber)
-                        this.$.stepContent.style.float = "";
-                    else if (toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber > fromStep._badgeNumber)
-                        this.$.stepContent.style.float = "right";
-                    else if (toStep._badgeNumber === this._badgeNumber && activeStep === null)
-                        this.$.stepContent.style.float = "right";
-                    else if (toStep._badgeNumber === this._badgeNumber && activeStep._badgeNumber < this._badgeNumber)
-                        this.$.stepContent.style.float = "right";
-                    else if (toStep._badgeNumber === this._badgeNumber && activeStep._badgeNumber > this._badgeNumber)
-                        this.$.stepContent.style.float = "";
-                    else if (toStep._badgeNumber === this._badgeNumber && !active)
-                        this.$.stepContent.style.float = "";
-                }
-            }
-
-            /**
              * This is a callback function called whent the step title is clicked.
              * This will close all the open steps before opening the one selected, if the criteria are respected.
              * Moreover, if we are in a case of a modification, we will display the update button.
@@ -353,7 +312,7 @@
                 if (!this.parentElement.finish && (!this.parentElement.linear && (!this.save || this.editable)) ||
                     (this.parentElement.linear &&
                         this.editable)) {
-                    this.parentElement.__closeAllStep(this);
+                    this.parentElement.closeAllStep();
                     this.toggleStep();
                     if (this.save && this.editable)
                         this.$.stepButtons.setUpdate(true);
@@ -367,9 +326,6 @@
              *                         If it is, we will call the function setFinish() to set the good button.
              */
             toggleStep(isLast) {
-
-                this._setFloatForTransition(!this.active);
-
                 if (isLast !== undefined && isLast)
                     this.$.stepButtons.setFinish(true);
 
@@ -421,14 +377,15 @@
                     composed: true
                 }));
             }
+
         }
 
-        window.customElements.define(CaribouStepElement.is, CaribouStepElement);
+        window.customElements.define(CaribouStepHorizontalElement.is, CaribouStepHorizontalElement);
 
         /**
          * @namespace Caribouflex
          */
         window.Caribouflex = window.Caribouflex || {};
-        Caribouflex.CaribouStepElement = CaribouStepElement;
+        Caribouflex.CaribouStepHorizontalElement = CaribouStepHorizontalElement;
     </script>
 </dom-module>

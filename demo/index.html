@@ -20,17 +20,16 @@
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
-
     </style>
   </custom-style>
 </head>
 
 <body>
   <div class="vertical-section-container centered">
-    <h3>Classic stepper</h3>
+    <h3>Horizontal stepper</h3>
     <demo-snippet>
       <template>
-        <caribou-stepper id="stepper">
+        <caribou-stepper id="stepper" horizontal>
           <caribou-step id="stepper1step1" label="Personal">
             <paper-input label="First Name"></paper-input>
             <paper-input label="Last Name"></paper-input>
@@ -83,23 +82,24 @@
         </caribou-stepper>
         <button onclick="reset();">reset</button>
         <script>
-          function reset() {
-            document.querySelector("#stepper2").reset();
-          }
-          document.querySelector("#stepper2step1").validate = function () {
-            return document.querySelector("#chk3").checked;
-          }
-          document.querySelector("#stepper2step2").validate = function () {
-            return document.querySelector("#clickButton").isValid();
-          }
-          document.querySelector("#stepper2step3").validate = function () {
-            var el = document.querySelector("#step3Input");
-            return el.value === "12345";
-          }
-
-          document.querySelector("#stepper2").addEventListener("step-invalid", function () {
-            console.log("Invalid Step");
-          })
+          window.addEventListener('WebComponentsReady', function () {
+            function reset() {
+              document.querySelector("#stepper2").reset();
+            }
+            document.querySelector("#stepper2step1").validate = function () {
+              return document.querySelector("#chk3").checked;
+            }
+            document.querySelector("#stepper2step2").validate = function () {
+              return document.querySelector("#clickButton").isValid();
+            }
+            document.querySelector("#stepper2step3").validate = function () {
+              var el = document.querySelector("#step3Input");
+              return el.value === "12345";
+            }
+            document.querySelector("#stepper2").addEventListener("step-invalid", function () {
+              console.log("Invalid Step");
+            })
+          });
         </script>
       </template>
     </demo-snippet>

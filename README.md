@@ -11,7 +11,7 @@ All the elements can be customized refer to the styling section.
 
 ### NEW
 
-- Horizontal stepper is coming 
+- Horizontal stepper
 - Step validation
 - IE11 support
 

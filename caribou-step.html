@@ -283,8 +283,10 @@
                 this._setStepperHorizontal(this.parentElement.horizontal);
 
                 //if there is no step behind, we clear the number of step context temp we used.
-                if (this.nextElementSibling === null)
+                if (this.nextElementSibling === null) {
+                    this.parentElement.numberOfStep = Caribouflex.Stepper.Context.numberOfStep;
                     Caribouflex.Stepper.Context.numberOfStep = undefined;
+                }
             }
 
             /**
@@ -314,7 +316,7 @@
              * @param {Boolean} active is the active step or not.
              * @private
              */
-            _setFloatForTransition(active) {
+            _setFloatForTransition() {
 
                 var toStep = this.parentElement.__toStep;
                 var fromStep = this.parentElement.__fromStep;
@@ -322,15 +324,19 @@
 
                 if (toStep !== undefined && toStep !== null) {
 
-                    if (toStep._badgeNumber < this._badgeNumber)
+                    if (toStep._badgeNumber === this.parentElement.numberOfStep && !this.parentElement.horizontal)
+                        this.$.stepContent.style.float = "";
+                    else if (toStep._badgeNumber < this._badgeNumber)
                         this.$.stepContent.style.float = "right";
                     else if (toStep._badgeNumber > this._badgeNumber)
                         this.$.stepContent.style.float = "";
                     else if (activeStep === undefined)
                         this.$.stepContent.style.float = "";
-                    else if(toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber < fromStep._badgeNumber)
+                    else if (toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber <
+                        fromStep._badgeNumber)
                         this.$.stepContent.style.float = "";
-                    else if (toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber > fromStep._badgeNumber)
+                    else if (toStep._badgeNumber === this._badgeNumber && fromStep !== undefined && toStep._badgeNumber >
+                        fromStep._badgeNumber)
                         this.$.stepContent.style.float = "right";
                     else if (toStep._badgeNumber === this._badgeNumber && activeStep === null)
                         this.$.stepContent.style.float = "right";
@@ -338,8 +344,8 @@
                         this.$.stepContent.style.float = "right";
                     else if (toStep._badgeNumber === this._badgeNumber && activeStep._badgeNumber > this._badgeNumber)
                         this.$.stepContent.style.float = "";
-                    else if (toStep._badgeNumber === this._badgeNumber && !active)
-                        this.$.stepContent.style.float = "";
+                    // else if (toStep._badgeNumber === this._badgeNumber && !active)
+                    //     this.$.stepContent.style.float = "";
                 }
             }
 
@@ -368,10 +374,11 @@
              */
             toggleStep(isLast) {
 
-                this._setFloatForTransition(!this.active);
+                this._setFloatForTransition();
 
-                if (isLast !== undefined && isLast)
+                if (isLast !== undefined && isLast) {
                     this.$.stepButtons.setFinish(true);
+                }
 
                 this.$.stepContent.toggle();
             }

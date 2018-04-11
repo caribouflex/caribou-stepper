@@ -111,6 +111,11 @@
                     backButton: {
                         type: Boolean,
                         value: false
+                    },
+
+                    noInputNativeValidity: {
+                        type: Boolean,
+                        value: false
                     }
                 }
             }
@@ -138,7 +143,32 @@
                 this.parentElement._registerStep(this);
             }
 
-            validate(){
+            _nestedValidate() {
+                //We check if the validity is required.
+                if (this.noInputNativeValidity)
+                    return true;
+
+                var result = true;
+                this.querySelectorAll("[required]").forEach(function (el) {
+                    let r;
+                    try {
+                        //Use classic input validation
+                        r = el.checkValidity();
+                    } catch (err) {
+                        //used to try on input that may be polymer input with a validate() function.
+                        try {
+                            r = el.validate();
+                        } catch (err) {
+                            console.log("caribou-step", "Can't validate required input");
+                        }
+                    }
+                    if (!r)
+                        result = false;
+                });
+                return result;
+            }
+
+            validate() {
                 return true;
             }
 

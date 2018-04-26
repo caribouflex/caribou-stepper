@@ -165,9 +165,8 @@
     </template>
 
     <script>
-        window.Caribouflex = window.Caribouflex || {};
-        Caribouflex.Stepper = Caribouflex.Stepper || {};
-        Caribouflex.Stepper.Context = Caribouflex.Stepper.Context || {};
+        window.Caribouflex.Stepper = window.Caribouflex.Stepper || {};
+        window.Caribouflex.Stepper.Context = window.Caribouflex.Stepper.Context || {};
 
         /**
          * `<caribou-step>` is an element that need to be surrounded by a `<caribou-stepper>` element.
@@ -270,22 +269,22 @@
 
             /**
              * Into this constructor we will initialize the badge value.
-             * The badge value is determine according a property set and increment into the Caribouflex.Stepper.Context
+             * The badge value is determine according a property set and increment into the window.Caribouflex.Stepper.Context
              */
             constructor() {
                 super();
                 //init the badge value
-                Caribouflex.Stepper.Context.numberOfStep = Caribouflex.Stepper.Context.numberOfStep ===
-                    undefined ? 1 : Caribouflex.Stepper.Context.numberOfStep + 1;
+                window.Caribouflex.Stepper.Context.numberOfStep = window.Caribouflex.Stepper.Context.numberOfStep ===
+                    undefined ? 1 : window.Caribouflex.Stepper.Context.numberOfStep + 1;
 
-                this._set_badgeNumber(Caribouflex.Stepper.Context.numberOfStep);
+                this._set_badgeNumber(window.Caribouflex.Stepper.Context.numberOfStep);
 
                 this._setStepperHorizontal(this.parentElement.horizontal);
 
                 //if there is no step behind, we clear the number of step context temp we used.
                 if (this.nextElementSibling === null) {
-                    this.parentElement.numberOfStep = Caribouflex.Stepper.Context.numberOfStep;
-                    Caribouflex.Stepper.Context.numberOfStep = undefined;
+                    this.parentElement.numberOfStep = window.Caribouflex.Stepper.Context.numberOfStep;
+                    window.Caribouflex.Stepper.Context.numberOfStep = undefined;
                 }
             }
 
@@ -436,6 +435,6 @@
          * @namespace Caribouflex
          */
         window.Caribouflex = window.Caribouflex || {};
-        Caribouflex.CaribouStepElement = CaribouStepElement;
+        window.Caribouflex.CaribouStepElement = CaribouStepElement;
     </script>
 </dom-module>

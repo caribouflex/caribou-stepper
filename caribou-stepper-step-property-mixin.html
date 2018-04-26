@@ -113,6 +113,11 @@
                         value: false
                     },
 
+                    /**
+                     * If true this will skip the validation of the input.
+                     * If false all the checkbox will have a native validation check on the input.
+                     * 
+                     */
                     noInputNativeValidity: {
                         type: Boolean,
                         value: false
@@ -143,6 +148,11 @@
                 this.parentElement._registerStep(this);
             }
 
+            /**
+             * This function is used to check the validity of the required input.
+             * This will check the native validation for classic input and call the validate() function for the polymer element.
+             * @private
+             */
             _nestedValidate() {
                 //We check if the validity is required.
                 if (this.noInputNativeValidity)

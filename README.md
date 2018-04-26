@@ -1,4 +1,4 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/PolymerElements/caribou-timer)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/caribouflex/caribou-stepper)
 
 ## &lt;caribou-stepper&gt;
 
@@ -11,11 +11,13 @@ All the elements can be customized refer to the styling section.
 
 ### NEW
 
-- Horizontal stepper is coming 
+- Horizontal stepper
 - Step validation
 - IE11 support
+- Step native Required input validation.
 
 ### Incoming (TODO)
+- GITHUB demo pages.
 - Bug Fixes
 - Mobile stepper
 
@@ -77,8 +79,6 @@ For the styling check the `<caribou-stepper>`, `<caribou-step>` and `<caribou-st
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
-## Running tests from the command line
-When in the caribou-timer directory, run polymer test
 
 ## License
 Apache License 2.0

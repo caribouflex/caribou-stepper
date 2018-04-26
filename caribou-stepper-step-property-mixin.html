@@ -111,6 +111,16 @@
                     backButton: {
                         type: Boolean,
                         value: false
+                    },
+
+                    /**
+                     * If true this will skip the validation of the input.
+                     * If false all the checkbox will have a native validation check on the input.
+                     * 
+                     */
+                    noInputNativeValidity: {
+                        type: Boolean,
+                        value: false
                     }
                 }
             }
@@ -138,7 +148,37 @@
                 this.parentElement._registerStep(this);
             }
 
-            validate(){
+            /**
+             * This function is used to check the validity of the required input.
+             * This will check the native validation for classic input and call the validate() function for the polymer element.
+             * @private
+             */
+            _nestedValidate() {
+                //We check if the validity is required.
+                if (this.noInputNativeValidity)
+                    return true;
+
+                var result = true;
+                this.querySelectorAll("[required]").forEach(function (el) {
+                    let r;
+                    try {
+                        //Use classic input validation
+                        r = el.checkValidity();
+                    } catch (err) {
+                        //used to try on input that may be polymer input with a validate() function.
+                        try {
+                            r = el.validate();
+                        } catch (err) {
+                            console.log("caribou-step", "Can't validate required input");
+                        }
+                    }
+                    if (!r)
+                        result = false;
+                });
+                return result;
+            }
+
+            validate() {
                 return true;
             }
 

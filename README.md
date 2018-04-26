@@ -1,4 +1,4 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/PolymerElements/caribou-stepper)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/caribouflex/caribou-stepper)
 
 ## &lt;caribou-stepper&gt;
 
@@ -14,8 +14,10 @@ All the elements can be customized refer to the styling section.
 - Horizontal stepper
 - Step validation
 - IE11 support
+- Step native Required input validation.
 
 ### Incoming (TODO)
+- GITHUB demo pages.
 - Bug Fixes
 - Mobile stepper
 

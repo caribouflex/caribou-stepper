@@ -158,8 +158,9 @@
         <div class="layout">
             <iron-collapse id="stepContent" opened="{{active}}" horizontal$="{{stepperHorizontal}}">
                 <slot></slot>
-                <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" finish-label="[[finishLabel]]" update-label="[[updateLabel]]"
-                    skip-label="[[skipLabel]]" skip-button="[[skipButton]]" back-label="[[backLabel]]" back-button="[[backButton]]"></caribou-step-action-buttons>
+                <caribou-step-action-buttons id="stepButtons" continue-label="[[continueLabel]]" finish-label="[[finishLabel]]"
+                    update-label="[[updateLabel]]" skip-label="[[skipLabel]]" skip-button="[[skipButton]]" back-label="[[backLabel]]"
+                    back-button="[[backButton]]"></caribou-step-action-buttons>
             </iron-collapse>
         </div>
     </template>
@@ -355,9 +356,12 @@
              * @private
              */
             _toggle() {
-                if (!this.parentElement.finish && (!this.parentElement.linear && (!this.save || this.editable)) ||
-                    (this.parentElement.linear &&
-                        this.editable)) {
+                if (!this.parentElement.finish &&
+                    ((!this.parentElement.linear && (!this.save || this.editable)) ||
+                        (this.parentElement.linear && this.save && this.editable || this.parentElement.activeStep
+                            .save &&
+                            (this.parentElement.previousStep !== null && this.parentElement.previousStep.save))
+                    )) {
                     this.parentElement.__closeAllStep(this);
                     this.toggleStep();
                     if (this.save && this.editable)

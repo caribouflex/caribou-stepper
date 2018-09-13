@@ -111,14 +111,14 @@
     <p>The name of the button can be changed by stepper.</p>
     <demo-snippet>
       <template>
-        <caribou-stepper id="stepper3">
-          <caribou-step id="stepper3step1" label="Step 1">
+        <caribou-stepper id="stepper3" linear open-first-step-on-startup>
+          <caribou-step id="stepper3step1" label="Step 1" editable>
             <h1>Content 1</h1>
           </caribou-step>
           <caribou-step id="stepper3step2" label="Step 2" skip-button back-button>
             <h1>Content 2</h1>
           </caribou-step>
-          <caribou-step id="stepper3step3" label="Step 3" back-button>
+          <caribou-step id="stepper3step3" label="Step 3" back-button editable>
             <h1>Content 3</h1>
           </caribou-step>
         </caribou-stepper>
